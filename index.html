@@ -41,6 +41,14 @@
         .visual-mensaje-central{position:relative;z-index:2;text-align:center}
         .visual-mensaje-central .emoji-grande{font-size:4.5rem;animation:flotar 2.5s ease-in-out infinite;display:block}
         .visual-mensaje-central .frase-visual{font-size:.7rem;color:var(--color-secundario)}
+        .seccion-galeria{margin-bottom:32px}
+        .seccion-galeria h3{font-size:.7rem;color:var(--color-secundario);text-align:center;margin-bottom:18px}
+        .galeria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px}
+        .galeria-item{position:relative;border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);overflow:hidden;aspect-ratio:1/1;background:var(--color-superficie-alt);box-shadow:var(--sombra-media)}
+        .galeria-item img{width:100%;height:100%;object-fit:cover}
+        .galeria-item .overlay-galeria{position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.85);color:#fff;padding:14px;opacity:0;transition:opacity .25s;font-size:.45rem;font-family:var(--fuente-secundaria)}
+        .galeria-item:hover .overlay-galeria{opacity:1}
+        .galeria-vacia{text-align:center;padding:36px;color:var(--color-texto-muted);grid-column:1/-1;font-size:.5rem}
         .seccion-muro{background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);padding:24px;margin-bottom:32px;box-shadow:var(--sombra-media)}
         .seccion-muro h3{font-size:.7rem;color:var(--color-secundario);text-align:center;margin-bottom:18px}
         .muro-form{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
@@ -55,16 +63,54 @@
         .mensaje-item .fecha-mensaje{font-size:.35rem;color:var(--color-texto-muted);margin-top:8px}
         .musica-toggle{position:fixed;bottom:24px;right:24px;z-index:100;width:52px;height:52px;background:var(--color-superficie);border:3px solid var(--color-borde);border-radius:6px;cursor:pointer;font-size:1.5rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--sombra-media)}
         .musica-toggle.mute{opacity:0.5}
+        .panel-admin{position:fixed;top:0;left:0;right:0;z-index:2000;background:var(--color-superficie);border-bottom:4px solid var(--color-acento);padding:20px;transform:translateY(-100%);transition:transform .4s;max-height:85vh;overflow-y:auto;font-size:.45rem}
+        .panel-admin.activo{transform:translateY(0)}
+        .panel-admin h3{color:var(--color-secundario);text-align:center;margin-bottom:14px;font-size:.65rem}
+        .panel-admin .admin-seccion{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-radius:var(--radio-borde);padding:16px;margin-bottom:14px}
+        .panel-admin h4{color:var(--color-texto-suave);margin-bottom:10px;font-size:.5rem}
+        .panel-admin input[type="url"],.panel-admin input[type="text"]{width:100%;padding:8px;border:2px solid var(--color-borde);border-radius:4px;background:var(--color-superficie);color:#fff;font-size:.45rem;margin-bottom:7px;font-family:var(--fuente-secundaria)}
+        .panel-admin .btn-archivo{display:inline-block;padding:8px;background:var(--color-superficie);border:2px dashed var(--color-borde);border-radius:4px;cursor:pointer;color:var(--color-texto-suave);font-size:.45rem;text-align:center;width:100%;margin-bottom:7px}
+        .panel-admin input[type="file"]{display:none}
+        .panel-admin .preview-mini{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+        .panel-admin .preview-mini img{width:48px;height:48px;object-fit:cover;border-radius:3px;border:2px solid var(--color-borde)}
+        .btn-admin{padding:8px 16px;border:2px solid;border-radius:4px;cursor:pointer;font-family:var(--fuente-pixel);font-size:.42rem;margin:4px 0;text-transform:uppercase}
+        .btn-admin-agregar{background:var(--color-secundario);color:var(--color-fondo);border-color:var(--crema-calido)}
+        .btn-admin-eliminar{background:#C0392B;color:#fff;border-color:#8b1a1a;font-size:.35rem;padding:4px 8px}
+        .btn-admin-cerrar{background:transparent;border:2px solid var(--color-borde);border-radius:4px;color:#fff;position:absolute;top:10px;right:14px;font-size:1rem;width:34px;height:34px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+        .admin-lista{list-style:none;max-height:150px;overflow-y:auto;margin-top:8px}
+        .admin-lista li{padding:6px 0;font-size:.4rem;border-bottom:1px solid var(--color-borde);display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--fuente-secundaria)}
         @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
         @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
         .shake{animation:shake .35s ease}
         @media(max-width:1024px){.grid-principal{grid-template-columns:1fr}.visual-contenedor{min-height:340px;order:-1}.contador-grid{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:600px){.contenedor-app{padding:14px 10px}.tarjeta-principal{padding:20px 14px}.boton-principal{padding:14px 28px;font-size:.55rem}.pantalla-activacion .icono-principal{font-size:3.5rem}.contador-item .numero{font-size:1rem}.muro-form{flex-direction:column}}
+        @media(max-width:600px){.contenedor-app{padding:14px 10px}.tarjeta-principal{padding:20px 14px}.boton-principal{padding:14px 28px;font-size:.55rem}.pantalla-activacion .icono-principal{font-size:3.5rem}.contador-item .numero{font-size:1rem}.muro-form{flex-direction:column}.galeria-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}}
     </style>
 </head>
 <body>
 
+    <!-- PANEL ADMIN SECRETO -->
+    <div id="panelAdmin" class="panel-admin">
+        <button id="btnCerrarAdmin" class="btn-admin-cerrar" title="Cerrar (ESC)">✕</button>
+        <h3>🔐 PANEL SECRETO</h3>
+        <div class="admin-seccion">
+            <h4>📸 SUBIR FOTOS DESDE TU DISPOSITIVO</h4>
+            <button type="button" class="btn-archivo" id="btnSeleccionarArchivos">📷 SELECCIONAR FOTOS</button>
+            <input type="file" id="inputAdminFotosArchivo" accept="image/*" multiple>
+            <div class="preview-mini" id="previewFotosSubidas"></div>
+            <input type="text" id="inputAdminFotoDescArchivo" placeholder="Descripción...">
+            <button id="btnAdminAgregarFotosArchivo" class="btn-admin btn-admin-agregar">⬆️ SUBIR FOTOS</button>
+            <hr style="border-color:var(--color-borde);margin:14px 0;">
+            <h4>🔗 AÑADIR FOTO POR URL</h4>
+            <input type="url" id="inputAdminFotoUrl" placeholder="https://...">
+            <input type="text" id="inputAdminFotoDesc" placeholder="Descripción...">
+            <button id="btnAdminAgregarFotoUrl" class="btn-admin btn-admin-agregar">➕ AÑADIR</button>
+            <h4 style="margin-top:14px;">📋 FOTOS (<span id="contadorFotosAdmin">0</span>)</h4>
+            <ul id="listaAdminFotos" class="admin-lista"></ul>
+        </div>
+    </div>
+
+    <!-- PANTALLA ACTIVACIÓN -->
     <div id="pantallaActivacion" class="pantalla-activacion">
         <div class="icono-principal">🎁</div>
         <h1>¡HAY UNA SORPRESA<br>ESPERÁNDOTE!</h1>
@@ -72,6 +118,7 @@
         <button id="btnRevelar" class="boton-principal">🎀 REVELAR 🎀</button>
     </div>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <div id="contenidoPrincipal" class="contenido-principal contenedor-app oculto">
         <div class="grid-principal">
             <div class="tarjeta-principal">
@@ -102,6 +149,10 @@
                 </div>
             </div>
         </div>
+        <div class="seccion-galeria" id="seccionGaleria">
+            <h3>📸 MOMENTOS ESPECIALES</h3>
+            <div class="galeria-grid" id="galeriaGrid"><p class="galeria-vacia">✨ AÑADE FOTOS DESDE EL PANEL SECRETO ✨</p></div>
+        </div>
         <div class="seccion-muro">
             <h3>💌 MURO DE MENSAJES</h3>
             <div class="muro-form">
@@ -118,6 +169,8 @@
     <script>
         (function(){
             const FB_URL='https://cumple-bc6e4-default-rtdb.firebaseio.com';
+            const SECUENCIA='76989903';
+            let buffer='';
             const ChiptunePlayer={audioCtx:null,isPlaying:false,ci:0,ni:null,mg:null,
                 melody:[{f:264,d:.35},{f:264,d:.35},{f:297,d:.35},{f:264,d:.35},{f:352,d:.35},{f:330,d:.35},{f:264,d:.7},{f:0,d:.2},{f:264,d:.35},{f:264,d:.35},{f:297,d:.35},{f:264,d:.35},{f:396,d:.35},{f:352,d:.35},{f:264,d:.7},{f:0,d:.2},{f:264,d:.35},{f:264,d:.35},{f:528,d:.35},{f:440,d:.35},{f:352,d:.35},{f:330,d:.35},{f:297,d:.7},{f:0,d:.2},{f:466,d:.35},{f:466,d:.35},{f:440,d:.35},{f:352,d:.35},{f:396,d:.35},{f:352,d:.7},{f:0,d:.5},{f:528,d:.3},{f:528,d:.3},{f:528,d:.6},{f:0,d:.8}],
                 init(){if(!this.audioCtx){this.audioCtx=new(window.AudioContext||window.webkitAudioContext)();this.mg=this.audioCtx.createGain();this.mg.gain.value=0.1;this.mg.connect(this.audioCtx.destination)}},
@@ -128,57 +181,72 @@
                 toggle(){return this.isPlaying?(this.stop(),false):(this.start(),true)}
             };
             const $=s=>document.querySelector(s);
-            let estado='INICIO',musicaActiva=false,animId=null,particulas=[],mensajes=[],ctx=null;
-            const MAX_P=100;
-            const domPa=$('#pantallaActivacion'),domCp=$('#contenidoPrincipal');
-            const domCc=$('#canvasConfeti'),domVc=$('#visualContenedor');
-            const domDd=$('#contadorDias'),domDh=$('#contadorHoras'),domDm=$('#contadorMinutos'),domDs=$('#contadorSegundos');
-            const domBm=$('#btnMusicaToggle'),domLm=$('#listaMensajes');
-            const domAm=$('#inputAutorMuro'),domMm=$('#inputMensajeMuro'),domEm=$('#btnEnviarMuro');
-            const domSv=$('#statVisitas'),domSm=$('#statMensajes');
+            let estado='INICIO',musicaActiva=false,animId=null,particulas=[],mensajes=[],fotos=[],ctx=null;
+            let archivosSel=[],MAX_P=100;
 
-            function toast(m,t){const toast=document.createElement('div');toast.textContent=m;toast.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#12080c;color:#fff;padding:12px 24px;border:2px solid #F28CA3;border-radius:4px;font-size:.5rem;z-index:9999;font-family:"Press Start 2P",monospace;text-align:center;max-width:90vw;box-shadow:6px 6px 0 rgba(0,0,0,.4)';document.body.appendChild(toast);setTimeout(()=>toast.remove(),2200);}
+            function toast(m){const t=document.createElement('div');t.textContent=m;t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#12080c;color:#fff;padding:12px 24px;border:2px solid #F28CA3;border-radius:4px;font-size:.5rem;z-index:9999;font-family:"Press Start 2P",monospace;text-align:center;max-width:90vw;box-shadow:6px 6px 0 rgba(0,0,0,.4)';document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
             function pad(n){return String(n).padStart(2,'0');}
             function calcT(f){const a=new Date(),o=new Date(f+'T00:00:00'),d=o-a;if(d<=0)return{dias:0,horas:0,minutos:0,segundos:0,ya:true};return{dias:Math.floor(d/864e5),horas:Math.floor(d/36e5)%24,minutos:Math.floor(d/6e4)%60,segundos:Math.floor(d/1e3)%60,ya:false};}
             function visitas(){let v=parseInt(localStorage.getItem('cv')||'0');if(!sessionStorage.getItem('cvs')){v++;localStorage.setItem('cv',v);sessionStorage.setItem('cvs','1')}return v;}
+            function archivoABase64(arch){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('Error'));r.readAsDataURL(arch);});}
 
+            // Firebase
             async function guardarMensajes(){localStorage.setItem('candy_msgs',JSON.stringify(mensajes));try{await fetch(FB_URL+'/mensajes.json',{method:'PUT',body:JSON.stringify(mensajes)})}catch(e){}}
             async function cargarMensajes(){try{const r=await fetch(FB_URL+'/mensajes.json');const d=await r.json();if(d&&Array.isArray(d)){mensajes=d;localStorage.setItem('candy_msgs',JSON.stringify(d))}}catch(e){const g=localStorage.getItem('candy_msgs');mensajes=g?JSON.parse(g):[]}renderMuro();}
+            async function guardarFotos(){localStorage.setItem('candy_fotos',JSON.stringify(fotos));try{await fetch(FB_URL+'/fotos.json',{method:'PUT',body:JSON.stringify(fotos.map(f=>({url:f.url&&f.url.length>500?'[IMG]':f.url,descripcion:f.descripcion,esBase64:!!f.esBase64})))})}catch(e){}}
+            async function cargarFotos(){try{const r=await fetch(FB_URL+'/fotos.json');const d=await r.json();if(d&&Array.isArray(d)&&d.length>0){const loc=JSON.parse(localStorage.getItem('candy_fotos')||'[]');fotos=loc.length>=d.length?loc:d}}catch(e){const g=localStorage.getItem('candy_fotos');fotos=g?JSON.parse(g):[]}renderGaleria();}
 
-            function renderMuro(){domLm.innerHTML=mensajes.length===0?'<p style="text-align:center;color:#c0909e;padding:16px;">💭 SÉ EL PRIMERO EN DEJAR UN MENSAJE...</p>':[...mensajes].reverse().map(m=>`<div class="mensaje-item"><span class="autor-mensaje">💝 ${m.autor||'ANÓNIMO'}</span><p class="texto-mensaje">${m.texto||''}</p><span class="fecha-mensaje">${m.fecha||''}</span></div>`).join('');domSm.textContent=mensajes.length;}
+            function renderMuro(){const lm=$('#listaMensajes');lm.innerHTML=mensajes.length===0?'<p style="text-align:center;color:#c0909e;padding:16px;">💭 SÉ EL PRIMERO EN DEJAR UN MENSAJE...</p>':[...mensajes].reverse().map(m=>`<div class="mensaje-item"><span class="autor-mensaje">💝 ${m.autor||'ANÓNIMO'}</span><p class="texto-mensaje">${m.texto||''}</p><span class="fecha-mensaje">${m.fecha||''}</span></div>`).join('');$('#statMensajes').textContent=mensajes.length;}
+            function renderGaleria(){const gg=$('#galeriaGrid');gg.innerHTML=fotos.length===0?'<p class="galeria-vacia">✨ AÑADE FOTOS DESDE EL PANEL SECRETO ✨</p>':fotos.map(f=>`<div class="galeria-item"><img src="${f.url||''}" alt="${f.descripcion||'MOMENTO'}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'galeria-vacia\\' style=\\'padding:20px;\\'>📷 ERROR</div>'">${f.descripcion?`<div class="overlay-galeria">${f.descripcion}</div>`:''}</div>`).join('');$('#statFotos').textContent=fotos.length;}
+            function renderPanelAdmin(){$('#contadorFotosAdmin').textContent=fotos.length;$('#listaAdminFotos').innerHTML=fotos.map((f,i)=>`<li><span>📷 ${f.descripcion||'Sin descripción'}<br><small>${f.url&&f.url.startsWith('data:')?'📁 SUBIDO':'🔗 URL'}</small></span><button class="btn-admin btn-admin-eliminar" data-idx="${i}">✕</button></li>`).join('');}
 
-            async function enviarMensaje(){const a=domAm.value.trim()||'ANÓNIMO',t=domMm.value.trim();if(!t){toast('✍️ ESCRIBE UN MENSAJE');domMm.classList.add('shake');setTimeout(()=>domMm.classList.remove('shake'),400);return;}mensajes.push({autor:a,texto:t,fecha:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})});await guardarMensajes();renderMuro();domAm.value='';domMm.value='';toast('💝 ¡MENSAJE ENVIADO!');}
+            async function enviarMensaje(){const a=$('#inputAutorMuro').value.trim()||'ANÓNIMO',t=$('#inputMensajeMuro').value.trim();if(!t){toast('✍️ ESCRIBE UN MENSAJE');return;}mensajes.push({autor:a,texto:t,fecha:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})});await guardarMensajes();renderMuro();$('#inputAutorMuro').value='';$('#inputMensajeMuro').value='';toast('💝 ¡MENSAJE ENVIADO!');}
 
-            function iniciarConfeti(){const c=domCc;c.width=domVc.clientWidth;c.height=domVc.clientHeight;ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;particulas=[];const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC'];for(let i=0;i<MAX_P;i++)particulas.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,t:Math.floor(Math.random()*7)+3,color:col[Math.floor(Math.random()*col.length)],vy:Math.random()*1.8+.4,vx:(Math.random()-.5)*1.2,r:Math.floor(Math.random()*4)*90,o:Math.random()*.6+.3});animarConfeti();}
-            function animarConfeti(){if(!ctx)return;const c=domCc;ctx.clearRect(0,0,c.width,c.height);particulas.forEach(p=>{ctx.save();ctx.globalAlpha=p.o;ctx.translate(Math.floor(p.x),Math.floor(p.y));ctx.rotate((p.r*Math.PI)/180);ctx.fillStyle=p.color;ctx.fillRect(-p.t/2,-p.t/2,p.t,p.t);ctx.restore();p.y+=p.vy;p.x+=p.vx;if(p.y>c.height+20){p.y=-20;p.x=Math.random()*c.width}if(p.x<-20)p.x=c.width+20;if(p.x>c.width+20)p.x=-20});animId=requestAnimationFrame(animarConfeti);}
-            function explosion(){if(!ctx)return;const c=domCc;const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC'];for(let i=0;i<60;i++){const idx=Math.floor(Math.random()*particulas.length);if(idx<particulas.length){particulas[idx].x=c.width/2+(Math.random()-.5)*120;particulas[idx].y=c.height/2+(Math.random()-.5)*120;particulas[idx].vy=(Math.random()-.5)*8;particulas[idx].vx=(Math.random()-.5)*8;particulas[idx].o=1;particulas[idx].color=col[Math.floor(Math.random()*col.length)];particulas[idx].t=Math.floor(Math.random()*8)+3}}}
+            // Fotos
+            $('#btnSeleccionarArchivos').addEventListener('click',()=>$('#inputAdminFotosArchivo').click());
+            $('#inputAdminFotosArchivo').addEventListener('change',e=>{archivosSel=Array.from(e.target.files);const p=$('#previewFotosSubidas');p.innerHTML='';archivosSel.forEach((a,i)=>{if(i>=12)return;const r=new FileReader();r.onload=ev=>{const img=document.createElement('img');img.src=ev.target.result;img.title=a.name;p.appendChild(img);};r.readAsDataURL(a);});if(archivosSel.length>12){const sp=document.createElement('span');sp.style.cssText='font-size:.38rem;color:#c0909e';sp.textContent='+ '+(archivosSel.length-12)+' MÁS';p.appendChild(sp);}});
+            $('#btnAdminAgregarFotosArchivo').addEventListener('click',async()=>{if(!archivosSel.length){toast('📸 SELECCIONA FOTOS');return;}const desc=$('#inputAdminFotoDescArchivo').value.trim();let ok=0;for(const a of archivosSel){if(a.size>2*1024*1024){toast('⚠️ '+a.name+' MUY GRANDE');continue;}try{fotos.push({url:await archivoABase64(a),descripcion:desc||a.name.replace(/\.[^.]+$/,''),esBase64:true});ok++;}catch(e){toast('❌ ERROR: '+a.name);}}if(ok){await guardarFotos();renderGaleria();renderPanelAdmin();toast('📸 ¡'+ok+' FOTO(S)!');}archivosSel=[];$('#inputAdminFotosArchivo').value='';$('#previewFotosSubidas').innerHTML='';$('#inputAdminFotoDescArchivo').value='';});
+            $('#btnAdminAgregarFotoUrl').addEventListener('click',async()=>{const url=$('#inputAdminFotoUrl').value.trim(),desc=$('#inputAdminFotoDesc').value.trim();if(!url){toast('📸 INGRESA URL');return;}fotos.push({url,descripcion:desc,esBase64:false});await guardarFotos();renderGaleria();renderPanelAdmin();$('#inputAdminFotoUrl').value='';$('#inputAdminFotoDesc').value='';toast('📸 ¡FOTO AÑADIDA!');});
+            $('#listaAdminFotos').addEventListener('click',async e=>{const btn=e.target.closest('.btn-admin-eliminar');if(!btn)return;const idx=parseInt(btn.dataset.idx);fotos.splice(idx,1);await guardarFotos();renderGaleria();renderPanelAdmin();toast('🗑️ ELIMINADO');});
 
-            function toggleMusica(){if(musicaActiva){ChiptunePlayer.stop();domBm.textContent='🔇';domBm.classList.add('mute')}else{ChiptunePlayer.start();domBm.textContent='🎵';domBm.classList.remove('mute')}musicaActiva=!musicaActiva;}
+            // Panel admin
+            function abrirPanel(){$('#panelAdmin').classList.add('activo');renderPanelAdmin();toast('🔐 PANEL SECRETO');}
+            function cerrarPanel(){$('#panelAdmin').classList.remove('activo');buffer='';}
+            $('#btnCerrarAdmin').addEventListener('click',cerrarPanel);
+            document.addEventListener('keydown',e=>{if(/^[0-9]$/.test(e.key)){buffer+=e.key;if(buffer.length>SECUENCIA.length)buffer=buffer.slice(-SECUENCIA.length);if(buffer===SECUENCIA){buffer='';abrirPanel();}}else if(e.key==='Escape'){cerrarPanel();buffer='';}});
+
+            // Confeti
+            function iniciarConfeti(){const c=$('#canvasConfeti');c.width=$('#visualContenedor').clientWidth;c.height=$('#visualContenedor').clientHeight;ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;particulas=[];const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC'];for(let i=0;i<MAX_P;i++)particulas.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,t:Math.floor(Math.random()*7)+3,color:col[Math.floor(Math.random()*col.length)],vy:Math.random()*1.8+.4,vx:(Math.random()-.5)*1.2,r:Math.floor(Math.random()*4)*90,o:Math.random()*.6+.3});animarConfeti();}
+            function animarConfeti(){if(!ctx)return;const c=$('#canvasConfeti');ctx.clearRect(0,0,c.width,c.height);particulas.forEach(p=>{ctx.save();ctx.globalAlpha=p.o;ctx.translate(Math.floor(p.x),Math.floor(p.y));ctx.rotate((p.r*Math.PI)/180);ctx.fillStyle=p.color;ctx.fillRect(-p.t/2,-p.t/2,p.t,p.t);ctx.restore();p.y+=p.vy;p.x+=p.vx;if(p.y>c.height+20){p.y=-20;p.x=Math.random()*c.width}if(p.x<-20)p.x=c.width+20;if(p.x>c.width+20)p.x=-20});animId=requestAnimationFrame(animarConfeti);}
+            function explosion(){if(!ctx)return;const c=$('#canvasConfeti');const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC'];for(let i=0;i<60;i++){const idx=Math.floor(Math.random()*particulas.length);if(idx<particulas.length){particulas[idx].x=c.width/2+(Math.random()-.5)*120;particulas[idx].y=c.height/2+(Math.random()-.5)*120;particulas[idx].vy=(Math.random()-.5)*8;particulas[idx].vx=(Math.random()-.5)*8;particulas[idx].o=1;particulas[idx].color=col[Math.floor(Math.random()*col.length)];particulas[idx].t=Math.floor(Math.random()*8)+3}}}
+
+            function toggleMusica(){if(musicaActiva){ChiptunePlayer.stop();$('#btnMusicaToggle').textContent='🔇';$('#btnMusicaToggle').classList.add('mute')}else{ChiptunePlayer.start();$('#btnMusicaToggle').textContent='🎵';$('#btnMusicaToggle').classList.remove('mute')}musicaActiva=!musicaActiva;}
 
             function revelar(){
-                estado='ACTIVO';domPa.classList.add('desvanecer');domCp.classList.remove('oculto');
-                setTimeout(()=>{domCp.classList.add('activo');iniciarConfeti();explosion();
-                    document.getElementById('nombreDestinatario').textContent='CANDY';
-                    document.getElementById('mensajePrincipal').textContent='Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.';
-                    domBm.classList.remove('oculto');domSv.textContent=visitas();
-                    cargarMensajes();
+                estado='ACTIVO';$('#pantallaActivacion').classList.add('desvanecer');$('#contenidoPrincipal').classList.remove('oculto');
+                setTimeout(()=>{$('#contenidoPrincipal').classList.add('activo');iniciarConfeti();explosion();
+                    $('#nombreDestinatario').textContent='CANDY';
+                    $('#mensajePrincipal').textContent='Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.';
+                    $('#btnMusicaToggle').classList.remove('oculto');$('#statVisitas').textContent=visitas();
+                    cargarMensajes();cargarFotos();
                     setTimeout(()=>{if(!musicaActiva)toggleMusica()},1200);
                 },400);
                 toast('🎉 ¡SORPRESA REVELADA!');
             }
 
-            function actualizarContador(){const t=calcT('2026-05-06');domDd.textContent=pad(t.dias);domDh.textContent=pad(t.horas);domDm.textContent=pad(t.minutos);domDs.textContent=pad(t.segundos);}
+            function actualizarContador(){const t=calcT('2026-05-06');$('#contadorDias').textContent=pad(t.dias);$('#contadorHoras').textContent=pad(t.horas);$('#contadorMinutos').textContent=pad(t.minutos);$('#contadorSegundos').textContent=pad(t.segundos);}
 
             async function init(){
-                document.getElementById('btnRevelar').addEventListener('click',revelar);
-                domBm.addEventListener('click',toggleMusica);
-                domEm.addEventListener('click',enviarMensaje);
-                domMm.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();enviarMensaje();}});
-                window.addEventListener('resize',()=>{if(domVc&&domCc){domCc.width=domVc.clientWidth;domCc.height=domVc.clientHeight}});
+                $('#btnRevelar').addEventListener('click',revelar);
+                $('#btnMusicaToggle').addEventListener('click',toggleMusica);
+                $('#btnEnviarMuro').addEventListener('click',enviarMensaje);
+                $('#inputMensajeMuro').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();enviarMensaje();}});
+                window.addEventListener('resize',()=>{const c=$('#canvasConfeti'),v=$('#visualContenedor');if(v&&c){c.width=v.clientWidth;c.height=v.clientHeight}});
                 setInterval(()=>{if(estado==='ACTIVO')actualizarContador()},1000);
-                setInterval(async()=>{if(estado==='ACTIVO')await cargarMensajes()},3000);
-                domSv.textContent=visitas();
+                setInterval(async()=>{if(estado==='ACTIVO'){await cargarMensajes();await cargarFotos();}},3000);
+                $('#statVisitas').textContent=visitas();
                 console.log('🌸 LISTO - Firebase: '+FB_URL);
+                console.log('🔐 Secuencia secreta: '+SECUENCIA);
             }
             document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
         })();
