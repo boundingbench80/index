@@ -6,85 +6,65 @@
     <title>🌸 ¡Feliz Cumpleaños, Candy! 🌸</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --rosa-pastel: #F8C8DC; --rosa-medio: #F28CA3; --rosa-fuerte: #E75480;
-            --rosa-oscuro: #c9406a; --blanco-puro: #FFFFFF; --crema-claro: #FFF3E0;
-            --crema-calido: #FDEBD0; --rojo-intenso: #E74C3C;
-            --color-primario: #E75480; --color-secundario: #FFF3E0; --color-acento: #F28CA3;
-            --color-fondo: #1a0a10; --color-superficie: #12080c; --color-superficie-alt: #1c0e14;
-            --color-texto: #FFFFFF; --color-texto-suave: #F8C8DC; --color-texto-muted: #c0909e;
-            --color-borde: rgba(242,140,163,0.35); --color-borde-activo: #F28CA3;
-            --sombra-suave: 4px 4px 0 rgba(0,0,0,0.3); --sombra-media: 6px 6px 0 rgba(0,0,0,0.35);
-            --sombra-fuerte: 8px 8px 0 rgba(0,0,0,0.4); --borde-pixel: 3px; --radio-borde: 6px;
-            --fuente-pixel: 'Press Start 2P', monospace; --fuente-secundaria: 'Segoe UI', sans-serif;
-        }
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:var(--fuente-pixel);background:var(--color-fondo);color:var(--color-texto);min-height:100vh;font-size:10px;line-height:1.7;}
-        .contenedor-app{max-width:1300px;margin:0 auto;padding:24px 20px;}
-        .oculto{display:none!important;}
-        .pantalla-activacion{position:fixed;inset:0;background:var(--color-fondo);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s,visibility .5s;padding:20px;}
-        .pantalla-activacion.desvanecer{opacity:0;visibility:hidden;pointer-events:none;}
-        .pantalla-activacion .icono-principal{font-size:5rem;animation:flotar 2.5s ease-in-out infinite;}
-        .pantalla-activacion h1{font-size:clamp(.8rem,2.5vw,1.4rem);text-align:center;line-height:1.8;animation:fadeInUp .8s ease forwards;}
-        .pantalla-activacion .subtitulo{font-size:.55rem;color:var(--color-texto-suave);animation:fadeInUp 1s ease forwards;}
-        .boton-principal{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;font-size:.7rem;color:#fff;background:var(--color-primario);border:var(--borde-pixel) solid var(--rosa-oscuro);border-radius:var(--radio-borde);cursor:pointer;text-transform:uppercase;box-shadow:var(--sombra-fuerte);transition:all .15s;animation:fadeInUp 1.2s ease forwards;}
-        .boton-principal:hover{background:#f06a92;transform:translateY(-2px);}
-        .boton-principal:active{transform:translateY(2px);box-shadow:2px 2px 0 rgba(0,0,0,.4);}
-        .contenido-principal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s;}
-        .contenido-principal.activo{opacity:1;transform:translateY(0);}
-        .grid-principal{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;}
-        .tarjeta-principal{background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);padding:28px 24px;box-shadow:var(--sombra-media);}
-        .badge-celebracion{display:inline-block;background:var(--color-acento);color:#fff;padding:8px 18px;border-radius:4px;font-size:.5rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px;box-shadow:var(--sombra-suave);}
-        .tarjeta-principal h2{font-size:clamp(.65rem,1.8vw,.9rem);color:var(--color-texto-suave);margin-bottom:8px;}
-        .nombre-destinatario{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--color-secundario);display:block;margin-bottom:20px;letter-spacing:2px;padding-bottom:14px;position:relative;}
-        .nombre-destinatario::after{content:'';position:absolute;bottom:0;left:0;width:50px;height:3px;background:var(--color-primario);border-radius:2px;}
-        .mensaje-texto{font-family:var(--fuente-secundaria);font-size:.75rem;line-height:1.9;padding:18px 16px;background:var(--color-superficie-alt);border-left:4px solid var(--color-primario);border-radius:4px;white-space:pre-line;max-height:320px;overflow-y:auto;margin-bottom:24px;}
-        .contador-contenedor{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-radius:var(--radio-borde);padding:18px 14px;margin-bottom:18px;text-align:center;}
-        .contador-contenedor h3{font-size:.45rem;color:var(--color-texto-suave);margin-bottom:12px;}
-        .contador-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
-        .contador-item{background:var(--color-superficie);border:2px solid var(--color-borde);border-radius:4px;padding:10px 6px;box-shadow:var(--sombra-suave);}
-        .contador-item .numero{font-size:1.3rem;color:var(--rojo-intenso);display:block;}
-        .contador-item .etiqueta{font-size:.35rem;color:var(--color-texto-muted);margin-top:5px;}
-        .estadisticas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;}
-        .estadistica-item{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-radius:4px;padding:10px 6px;font-size:.4rem;box-shadow:var(--sombra-suave);}
-        .estadistica-item .valor-stat{font-size:.9rem;color:var(--color-secundario);display:block;}
-        .visual-contenedor{position:relative;background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);box-shadow:var(--sombra-media);overflow:hidden;min-height:480px;display:flex;align-items:center;justify-content:center;}
-        #canvasConfeti{position:absolute;inset:0;z-index:1;pointer-events:none;}
-        .visual-mensaje-central{position:relative;z-index:2;text-align:center;}
-        .visual-mensaje-central .emoji-grande{font-size:4.5rem;animation:flotar 2.5s ease-in-out infinite;display:block;}
-        .visual-mensaje-central .frase-visual{font-size:.7rem;color:var(--color-secundario);}
-        .seccion-muro{background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);padding:24px;margin-bottom:32px;box-shadow:var(--sombra-media);}
-        .seccion-muro h3{font-size:.7rem;color:var(--color-secundario);text-align:center;margin-bottom:18px;}
-        .muro-form{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;}
-        .muro-form input,.muro-form textarea{padding:12px 14px;border:2px solid var(--color-borde);border-radius:4px;font-size:.5rem;background:var(--color-superficie-alt);color:var(--color-texto);font-family:var(--fuente-secundaria);}
-        .muro-form input{flex:2;min-width:140px;}
-        .muro-form textarea{flex:3;min-width:200px;resize:vertical;min-height:55px;}
-        .muro-form input:focus,.muro-form textarea:focus{outline:none;border-color:var(--color-primario);}
-        .btn-muro{padding:12px 22px;font-size:.5rem;color:#fff;background:var(--color-primario);border:2px solid var(--rosa-oscuro);border-radius:4px;cursor:pointer;text-transform:uppercase;box-shadow:var(--sombra-suave);white-space:nowrap;}
-        .btn-muro:hover{background:#f06a92;transform:translateY(-2px);}
-        .lista-mensajes{max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;}
-        .mensaje-item{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-left:4px solid var(--color-primario);border-radius:4px;padding:12px 14px;font-size:.48rem;animation:fadeInUp .35s ease forwards;}
-        .mensaje-item .autor-mensaje{color:var(--color-texto-suave);font-size:.45rem;}
-        .mensaje-item .texto-mensaje{margin-top:6px;font-family:var(--fuente-secundaria);}
-        .mensaje-item .fecha-mensaje{font-size:.35rem;color:var(--color-texto-muted);margin-top:8px;}
-        .musica-toggle{position:fixed;bottom:24px;right:24px;z-index:100;width:52px;height:52px;background:var(--color-superficie);border:3px solid var(--color-borde);border-radius:6px;cursor:pointer;font-size:1.5rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--sombra-media);}
-        .musica-toggle.mute{opacity:0.5;}
-        .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(120px);background:var(--color-superficie);color:var(--color-texto);padding:12px 24px;border:2px solid var(--color-borde);border-radius:4px;font-size:.5rem;z-index:3000;opacity:0;transition:all .35s;pointer-events:none;box-shadow:var(--sombra-media);text-align:center;max-width:90vw;}
-        .toast.mostrar{opacity:1;transform:translateX(-50%) translateY(0);}
-        .toast.exito{border-color:var(--color-acento);color:var(--color-texto-suave);}
+        :root{--rosa-pastel:#F8C8DC;--rosa-medio:#F28CA3;--rosa-fuerte:#E75480;--rosa-oscuro:#c9406a;--blanco-puro:#FFFFFF;--crema-claro:#FFF3E0;--crema-calido:#FDEBD0;--rojo-intenso:#E74C3C;--color-primario:#E75480;--color-secundario:#FFF3E0;--color-acento:#F28CA3;--color-fondo:#1a0a10;--color-superficie:#12080c;--color-superficie-alt:#1c0e14;--color-texto:#FFFFFF;--color-texto-suave:#F8C8DC;--color-texto-muted:#c0909e;--color-borde:rgba(242,140,163,0.35);--sombra-suave:4px 4px 0 rgba(0,0,0,0.3);--sombra-media:6px 6px 0 rgba(0,0,0,0.35);--borde-pixel:3px;--radio-borde:6px;--fuente-pixel:'Press Start 2P',monospace;--fuente-secundaria:'Segoe UI',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:var(--fuente-pixel);background:var(--color-fondo);color:var(--color-texto);min-height:100vh;font-size:10px;line-height:1.7}
+        .contenedor-app{max-width:1300px;margin:0 auto;padding:24px 20px}
+        .oculto{display:none!important}
+        .pantalla-activacion{position:fixed;inset:0;background:var(--color-fondo);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .5s,visibility .5s;padding:20px}
+        .pantalla-activacion.desvanecer{opacity:0;visibility:hidden;pointer-events:none}
+        .pantalla-activacion .icono-principal{font-size:5rem;animation:flotar 2.5s ease-in-out infinite}
+        .pantalla-activacion h1{font-size:clamp(.8rem,2.5vw,1.4rem);text-align:center;line-height:1.8;animation:fadeInUp .8s ease forwards}
+        .pantalla-activacion .subtitulo{font-size:.55rem;color:var(--color-texto-suave);animation:fadeInUp 1s ease forwards}
+        .boton-principal{display:inline-flex;align-items:center;gap:10px;padding:16px 40px;font-size:.7rem;color:#fff;background:var(--color-primario);border:var(--borde-pixel) solid var(--rosa-oscuro);border-radius:var(--radio-borde);cursor:pointer;text-transform:uppercase;box-shadow:8px 8px 0 rgba(0,0,0,.4);transition:all .15s;animation:fadeInUp 1.2s ease forwards}
+        .boton-principal:hover{background:#f06a92;transform:translateY(-2px)}
+        .contenido-principal{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+        .contenido-principal.activo{opacity:1;transform:translateY(0)}
+        .grid-principal{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+        .tarjeta-principal{background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);padding:28px 24px;box-shadow:var(--sombra-media)}
+        .badge-celebracion{display:inline-block;background:var(--color-acento);color:#fff;padding:8px 18px;border-radius:4px;font-size:.5rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:18px}
+        .tarjeta-principal h2{font-size:clamp(.65rem,1.8vw,.9rem);color:var(--color-texto-suave);margin-bottom:8px}
+        .nombre-destinatario{font-size:clamp(1rem,2.5vw,1.4rem);color:var(--color-secundario);display:block;margin-bottom:20px;letter-spacing:2px;padding-bottom:14px;position:relative}
+        .nombre-destinatario::after{content:'';position:absolute;bottom:0;left:0;width:50px;height:3px;background:var(--color-primario);border-radius:2px}
+        .mensaje-texto{font-family:var(--fuente-secundaria);font-size:.75rem;line-height:1.9;padding:18px 16px;background:var(--color-superficie-alt);border-left:4px solid var(--color-primario);border-radius:4px;white-space:pre-line;max-height:320px;overflow-y:auto;margin-bottom:24px}
+        .contador-contenedor{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-radius:var(--radio-borde);padding:18px 14px;margin-bottom:18px;text-align:center}
+        .contador-contenedor h3{font-size:.45rem;color:var(--color-texto-suave);margin-bottom:12px}
+        .contador-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+        .contador-item{background:var(--color-superficie);border:2px solid var(--color-borde);border-radius:4px;padding:10px 6px}
+        .contador-item .numero{font-size:1.3rem;color:var(--rojo-intenso);display:block}
+        .contador-item .etiqueta{font-size:.35rem;color:var(--color-texto-muted);margin-top:5px}
+        .estadisticas{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+        .estadistica-item{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-radius:4px;padding:10px 6px;font-size:.4rem}
+        .estadistica-item .valor-stat{font-size:.9rem;color:var(--color-secundario);display:block}
+        .visual-contenedor{position:relative;background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);box-shadow:var(--sombra-media);overflow:hidden;min-height:480px;display:flex;align-items:center;justify-content:center}
+        #canvasConfeti{position:absolute;inset:0;z-index:1;pointer-events:none}
+        .visual-mensaje-central{position:relative;z-index:2;text-align:center}
+        .visual-mensaje-central .emoji-grande{font-size:4.5rem;animation:flotar 2.5s ease-in-out infinite;display:block}
+        .visual-mensaje-central .frase-visual{font-size:.7rem;color:var(--color-secundario)}
+        .seccion-muro{background:var(--color-superficie);border:var(--borde-pixel) solid var(--color-borde);border-radius:var(--radio-borde);padding:24px;margin-bottom:32px;box-shadow:var(--sombra-media)}
+        .seccion-muro h3{font-size:.7rem;color:var(--color-secundario);text-align:center;margin-bottom:18px}
+        .muro-form{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+        .muro-form input,.muro-form textarea{padding:12px 14px;border:2px solid var(--color-borde);border-radius:4px;font-size:.5rem;background:var(--color-superficie-alt);color:var(--color-texto);font-family:var(--fuente-secundaria)}
+        .muro-form input{flex:2;min-width:140px}
+        .muro-form textarea{flex:3;min-width:200px;resize:vertical;min-height:55px}
+        .btn-muro{padding:12px 22px;font-size:.5rem;color:#fff;background:var(--color-primario);border:2px solid var(--rosa-oscuro);border-radius:4px;cursor:pointer;text-transform:uppercase;white-space:nowrap}
+        .lista-mensajes{max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+        .mensaje-item{background:var(--color-superficie-alt);border:2px solid var(--color-borde);border-left:4px solid var(--color-primario);border-radius:4px;padding:12px 14px;font-size:.48rem;animation:fadeInUp .35s ease forwards}
+        .mensaje-item .autor-mensaje{color:var(--color-texto-suave);font-size:.45rem}
+        .mensaje-item .texto-mensaje{margin-top:6px;font-family:var(--fuente-secundaria)}
+        .mensaje-item .fecha-mensaje{font-size:.35rem;color:var(--color-texto-muted);margin-top:8px}
+        .musica-toggle{position:fixed;bottom:24px;right:24px;z-index:100;width:52px;height:52px;background:var(--color-superficie);border:3px solid var(--color-borde);border-radius:6px;cursor:pointer;font-size:1.5rem;display:flex;align-items:center;justify-content:center;box-shadow:var(--sombra-media)}
+        .musica-toggle.mute{opacity:0.5}
         @keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
         @keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
         @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-        .shake{animation:shake .35s ease;}
+        .shake{animation:shake .35s ease}
         @media(max-width:1024px){.grid-principal{grid-template-columns:1fr}.visual-contenedor{min-height:340px;order:-1}.contador-grid{grid-template-columns:repeat(2,1fr)}}
         @media(max-width:600px){.contenedor-app{padding:14px 10px}.tarjeta-principal{padding:20px 14px}.boton-principal{padding:14px 28px;font-size:.55rem}.pantalla-activacion .icono-principal{font-size:3.5rem}.contador-item .numero{font-size:1rem}.muro-form{flex-direction:column}}
     </style>
 </head>
 <body>
 
-    <div id="toast" class="toast"></div>
-
-    <!-- PANTALLA DE ACTIVACIÓN -->
     <div id="pantallaActivacion" class="pantalla-activacion">
         <div class="icono-principal">🎁</div>
         <h1>¡HAY UNA SORPRESA<br>ESPERÁNDOTE!</h1>
@@ -92,19 +72,16 @@
         <button id="btnRevelar" class="boton-principal">🎀 REVELAR 🎀</button>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div id="contenidoPrincipal" class="contenido-principal contenedor-app oculto">
         <div class="grid-principal">
             <div class="tarjeta-principal">
-                <span class="badge-celebracion" id="badgeCelebracion">🎂 CUMPLEAÑOS</span>
+                <span class="badge-celebracion">🎂 CUMPLEAÑOS</span>
                 <h2>FELIZ CUMPLEAÑOS</h2>
                 <span class="nombre-destinatario" id="nombreDestinatario">CANDY</span>
-                <div class="mensaje-texto" id="mensajePrincipal">
-                    Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.
-                </div>
+                <div class="mensaje-texto" id="mensajePrincipal">Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.</div>
                 <div class="contador-contenedor">
                     <h3>⏳ CUENTA REGRESIVA</h3>
-                    <div class="contador-grid" id="contadorGrid">
+                    <div class="contador-grid">
                         <div class="contador-item"><span class="numero" id="contadorDias">00</span><span class="etiqueta">DIAS</span></div>
                         <div class="contador-item"><span class="numero" id="contadorHoras">00</span><span class="etiqueta">HORAS</span></div>
                         <div class="contador-item"><span class="numero" id="contadorMinutos">00</span><span class="etiqueta">MIN</span></div>
@@ -125,9 +102,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- MURO DE MENSAJES -->
-        <div class="seccion-muro" id="seccionMuro">
+        <div class="seccion-muro">
             <h3>💌 MURO DE MENSAJES</h3>
             <div class="muro-form">
                 <input type="text" id="inputAutorMuro" placeholder="TU NOMBRE" maxlength="30">
@@ -138,14 +113,11 @@
         </div>
     </div>
 
-    <button id="btnMusicaToggle" class="musica-toggle oculto" title="MÚSICA ON/OFF">🎵</button>
+    <button id="btnMusicaToggle" class="musica-toggle oculto" title="MÚSICA">🎵</button>
 
     <script>
         (function(){
-            // 🔥 CONFIGURACIÓN FIREBASE
-            const FB_URL = 'https://cumple-bc6e4-default-rtdb.firebaseio.com';
-
-            // 🎵 CHIPTUNE
+            const FB_URL='https://cumple-bc6e4-default-rtdb.firebaseio.com';
             const ChiptunePlayer={audioCtx:null,isPlaying:false,ci:0,ni:null,mg:null,
                 melody:[{f:264,d:.35},{f:264,d:.35},{f:297,d:.35},{f:264,d:.35},{f:352,d:.35},{f:330,d:.35},{f:264,d:.7},{f:0,d:.2},{f:264,d:.35},{f:264,d:.35},{f:297,d:.35},{f:264,d:.35},{f:396,d:.35},{f:352,d:.35},{f:264,d:.7},{f:0,d:.2},{f:264,d:.35},{f:264,d:.35},{f:528,d:.35},{f:440,d:.35},{f:352,d:.35},{f:330,d:.35},{f:297,d:.7},{f:0,d:.2},{f:466,d:.35},{f:466,d:.35},{f:440,d:.35},{f:352,d:.35},{f:396,d:.35},{f:352,d:.7},{f:0,d:.5},{f:528,d:.3},{f:528,d:.3},{f:528,d:.6},{f:0,d:.8}],
                 init(){if(!this.audioCtx){this.audioCtx=new(window.AudioContext||window.webkitAudioContext)();this.mg=this.audioCtx.createGain();this.mg.gain.value=0.1;this.mg.connect(this.audioCtx.destination)}},
@@ -155,34 +127,29 @@
                 stop(){this.isPlaying=false;if(this.ni){clearTimeout(this.ni);this.ni=null}},
                 toggle(){return this.isPlaying?(this.stop(),false):(this.start(),true)}
             };
-
             const $=s=>document.querySelector(s);
-            let estado='INICIO',musicaActiva=false,usandoChip=true,animId=null,particulas=[],mensajes=[];
+            let estado='INICIO',musicaActiva=false,animId=null,particulas=[],mensajes=[],ctx=null;
             const MAX_P=100;
-            const domPa=$('#pantallaActivacion'),domCp=$('#contenidoPrincipal'),domBr=$('#btnRevelar');
+            const domPa=$('#pantallaActivacion'),domCp=$('#contenidoPrincipal');
             const domCc=$('#canvasConfeti'),domVc=$('#visualContenedor');
-            const domNd=$('#nombreDestinatario'),domMp=$('#mensajePrincipal');
             const domDd=$('#contadorDias'),domDh=$('#contadorHoras'),domDm=$('#contadorMinutos'),domDs=$('#contadorSegundos');
-            const domBm=$('#btnMusicaToggle'),domToast=$('#toast');
-            const domLm=$('#listaMensajes'),domAm=$('#inputAutorMuro'),domMm=$('#inputMensajeMuro'),domEm=$('#btnEnviarMuro');
+            const domBm=$('#btnMusicaToggle'),domLm=$('#listaMensajes');
+            const domAm=$('#inputAutorMuro'),domMm=$('#inputMensajeMuro'),domEm=$('#btnEnviarMuro');
             const domSv=$('#statVisitas'),domSm=$('#statMensajes');
-            let ctx=null;
 
-            function toast(m,t){domToast.textContent=m;domToast.className='toast '+t+' mostrar';clearTimeout(domToast._t);domToast._t=setTimeout(()=>domToast.classList.remove('mostrar'),2200);}
+            function toast(m,t){const toast=document.createElement('div');toast.textContent=m;toast.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#12080c;color:#fff;padding:12px 24px;border:2px solid #F28CA3;border-radius:4px;font-size:.5rem;z-index:9999;font-family:"Press Start 2P",monospace;text-align:center;max-width:90vw;box-shadow:6px 6px 0 rgba(0,0,0,.4)';document.body.appendChild(toast);setTimeout(()=>toast.remove(),2200);}
             function pad(n){return String(n).padStart(2,'0');}
-            function calcTiempo(f){const a=new Date(),o=new Date(f+'T00:00:00'),d=o-a;if(d<=0)return{dias:0,horas:0,minutos:0,segundos:0,ya:true};return{dias:Math.floor(d/864e5),horas:Math.floor(d/36e5)%24,minutos:Math.floor(d/6e4)%60,segundos:Math.floor(d/1e3)%60,ya:false};}
-            function obtenerVisitas(){let v=parseInt(localStorage.getItem('cv')||'0');if(!sessionStorage.getItem('cvs')){v++;localStorage.setItem('cv',v);sessionStorage.setItem('cvs','1')}return v;}
+            function calcT(f){const a=new Date(),o=new Date(f+'T00:00:00'),d=o-a;if(d<=0)return{dias:0,horas:0,minutos:0,segundos:0,ya:true};return{dias:Math.floor(d/864e5),horas:Math.floor(d/36e5)%24,minutos:Math.floor(d/6e4)%60,segundos:Math.floor(d/1e3)%60,ya:false};}
+            function visitas(){let v=parseInt(localStorage.getItem('cv')||'0');if(!sessionStorage.getItem('cvs')){v++;localStorage.setItem('cv',v);sessionStorage.setItem('cvs','1')}return v;}
 
-            // 🔥 GUARDAR/CARGAR MENSAJES CON FIREBASE
             async function guardarMensajes(){localStorage.setItem('candy_msgs',JSON.stringify(mensajes));try{await fetch(FB_URL+'/mensajes.json',{method:'PUT',body:JSON.stringify(mensajes)})}catch(e){}}
             async function cargarMensajes(){try{const r=await fetch(FB_URL+'/mensajes.json');const d=await r.json();if(d&&Array.isArray(d)){mensajes=d;localStorage.setItem('candy_msgs',JSON.stringify(d))}}catch(e){const g=localStorage.getItem('candy_msgs');mensajes=g?JSON.parse(g):[]}renderMuro();}
 
-            function renderMuro(){domLm.innerHTML=mensajes.length===0?'<p style="text-align:center;color:var(--color-texto-muted);padding:16px;">💭 SÉ EL PRIMERO EN DEJAR UN MENSAJE...</p>':[...mensajes].reverse().map(m=>`<div class="mensaje-item"><span class="autor-mensaje">💝 ${m.autor||'ANÓNIMO'}</span><p class="texto-mensaje">${m.texto||''}</p><span class="fecha-mensaje">${m.fecha||''}</span></div>`).join('');domSm.textContent=mensajes.length;}
+            function renderMuro(){domLm.innerHTML=mensajes.length===0?'<p style="text-align:center;color:#c0909e;padding:16px;">💭 SÉ EL PRIMERO EN DEJAR UN MENSAJE...</p>':[...mensajes].reverse().map(m=>`<div class="mensaje-item"><span class="autor-mensaje">💝 ${m.autor||'ANÓNIMO'}</span><p class="texto-mensaje">${m.texto||''}</p><span class="fecha-mensaje">${m.fecha||''}</span></div>`).join('');domSm.textContent=mensajes.length;}
 
-            async function enviarMensaje(){const a=domAm.value.trim()||'ANÓNIMO',t=domMm.value.trim();if(!t){toast('✍️ ESCRIBE UN MENSAJE','error');domMm.classList.add('shake');setTimeout(()=>domMm.classList.remove('shake'),400);return;}mensajes.push({autor:a,texto:t,fecha:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})});await guardarMensajes();renderMuro();domAm.value='';domMm.value='';toast('💝 ¡MENSAJE ENVIADO!','exito');}
+            async function enviarMensaje(){const a=domAm.value.trim()||'ANÓNIMO',t=domMm.value.trim();if(!t){toast('✍️ ESCRIBE UN MENSAJE');domMm.classList.add('shake');setTimeout(()=>domMm.classList.remove('shake'),400);return;}mensajes.push({autor:a,texto:t,fecha:new Date().toLocaleDateString('es-ES',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})});await guardarMensajes();renderMuro();domAm.value='';domMm.value='';toast('💝 ¡MENSAJE ENVIADO!');}
 
-            // 🎨 CONFETI
-            function iniciarConfeti(){const c=domCc;c.width=domVc.clientWidth;c.height=domVc.clientHeight;ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;particulas=[];const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC','#ffb3c6'];for(let i=0;i<MAX_P;i++)particulas.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,t:Math.floor(Math.random()*7)+3,color:col[Math.floor(Math.random()*col.length)],vy:Math.random()*1.8+.4,vx:(Math.random()-.5)*1.2,r:Math.floor(Math.random()*4)*90,o:Math.random()*.6+.3});animarConfeti();}
+            function iniciarConfeti(){const c=domCc;c.width=domVc.clientWidth;c.height=domVc.clientHeight;ctx=c.getContext('2d');ctx.imageSmoothingEnabled=false;particulas=[];const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC'];for(let i=0;i<MAX_P;i++)particulas.push({x:Math.random()*c.width,y:Math.random()*c.height-c.height,t:Math.floor(Math.random()*7)+3,color:col[Math.floor(Math.random()*col.length)],vy:Math.random()*1.8+.4,vx:(Math.random()-.5)*1.2,r:Math.floor(Math.random()*4)*90,o:Math.random()*.6+.3});animarConfeti();}
             function animarConfeti(){if(!ctx)return;const c=domCc;ctx.clearRect(0,0,c.width,c.height);particulas.forEach(p=>{ctx.save();ctx.globalAlpha=p.o;ctx.translate(Math.floor(p.x),Math.floor(p.y));ctx.rotate((p.r*Math.PI)/180);ctx.fillStyle=p.color;ctx.fillRect(-p.t/2,-p.t/2,p.t,p.t);ctx.restore();p.y+=p.vy;p.x+=p.vx;if(p.y>c.height+20){p.y=-20;p.x=Math.random()*c.width}if(p.x<-20)p.x=c.width+20;if(p.x>c.width+20)p.x=-20});animId=requestAnimationFrame(animarConfeti);}
             function explosion(){if(!ctx)return;const c=domCc;const col=['#E75480','#FFF3E0','#F28CA3','#FDEBD0','#F8C8DC'];for(let i=0;i<60;i++){const idx=Math.floor(Math.random()*particulas.length);if(idx<particulas.length){particulas[idx].x=c.width/2+(Math.random()-.5)*120;particulas[idx].y=c.height/2+(Math.random()-.5)*120;particulas[idx].vy=(Math.random()-.5)*8;particulas[idx].vx=(Math.random()-.5)*8;particulas[idx].o=1;particulas[idx].color=col[Math.floor(Math.random()*col.length)];particulas[idx].t=Math.floor(Math.random()*8)+3}}}
 
@@ -191,26 +158,26 @@
             function revelar(){
                 estado='ACTIVO';domPa.classList.add('desvanecer');domCp.classList.remove('oculto');
                 setTimeout(()=>{domCp.classList.add('activo');iniciarConfeti();explosion();
-                    domNd.textContent='CANDY';
-                    domMp.textContent='Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.';
-                    domBm.classList.remove('oculto');domSv.textContent=obtenerVisitas();
+                    document.getElementById('nombreDestinatario').textContent='CANDY';
+                    document.getElementById('mensajePrincipal').textContent='Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.';
+                    domBm.classList.remove('oculto');domSv.textContent=visitas();
                     cargarMensajes();
                     setTimeout(()=>{if(!musicaActiva)toggleMusica()},1200);
                 },400);
+                toast('🎉 ¡SORPRESA REVELADA!');
             }
 
-            function actualizarContador(){const t=calcTiempo('2026-05-06');domDd.textContent=pad(t.dias);domDh.textContent=pad(t.horas);domDm.textContent=pad(t.minutos);domDs.textContent=pad(t.segundos);}
+            function actualizarContador(){const t=calcT('2026-05-06');domDd.textContent=pad(t.dias);domDh.textContent=pad(t.horas);domDm.textContent=pad(t.minutos);domDs.textContent=pad(t.segundos);}
 
             async function init(){
-                domBr.addEventListener('click',revelar);
+                document.getElementById('btnRevelar').addEventListener('click',revelar);
                 domBm.addEventListener('click',toggleMusica);
                 domEm.addEventListener('click',enviarMensaje);
                 domMm.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();enviarMensaje();}});
                 window.addEventListener('resize',()=>{if(domVc&&domCc){domCc.width=domVc.clientWidth;domCc.height=domVc.clientHeight}});
                 setInterval(()=>{if(estado==='ACTIVO')actualizarContador()},1000);
-                // Sincronizar mensajes cada 3 segundos
                 setInterval(async()=>{if(estado==='ACTIVO')await cargarMensajes()},3000);
-                domSv.textContent=obtenerVisitas();
+                domSv.textContent=visitas();
                 console.log('🌸 LISTO - Firebase: '+FB_URL);
             }
             document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
