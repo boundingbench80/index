@@ -1,0 +1,2117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 ¡Feliz Cumpleaños, Candy! 🌸</title>
+
+    <!-- Fuente pixel art -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        /* ============================================================
+           VARIABLES CSS - PALETA ROSA + CREMA + BLANCO + ROJO
+           ============================================================ */
+        :root {
+            --rosa-pastel: #F8C8DC;
+            --rosa-medio: #F28CA3;
+            --rosa-fuerte: #E75480;
+            --rosa-oscuro: #c9406a;
+            --blanco-puro: #FFFFFF;
+            --blanco-roto: #F5F5F5;
+            --crema-claro: #FFF3E0;
+            --crema-calido: #FDEBD0;
+            --rojo-elegante: #C0392B;
+            --rojo-intenso: #E74C3C;
+            --color-primario: var(--rosa-fuerte);
+            --color-primario-hover: #f06a92;
+            --color-primario-oscuro: var(--rosa-oscuro);
+            --color-secundario: var(--crema-claro);
+            --color-secundario-oscuro: var(--crema-calido);
+            --color-acento: var(--rosa-medio);
+            --color-acento-suave: var(--rosa-pastel);
+            --color-fondo: #1a0a10;
+            --color-fondo-suave: #241018;
+            --color-superficie: #12080c;
+            --color-superficie-alt: #1c0e14;
+            --color-superficie-hover: #221016;
+            --color-texto: var(--blanco-puro);
+            --color-texto-suave: var(--rosa-pastel);
+            --color-texto-muted: #c0909e;
+            --color-borde: rgba(242, 140, 163, 0.35);
+            --color-borde-activo: var(--rosa-medio);
+            --color-borde-brillante: var(--crema-calido);
+            --sombra-suave: 4px 4px 0 rgba(0, 0, 0, 0.3);
+            --sombra-media: 6px 6px 0 rgba(0, 0, 0, 0.35);
+            --sombra-fuerte: 8px 8px 0 rgba(0, 0, 0, 0.4);
+            --brillo: 0 0 20px rgba(231, 84, 128, 0.2);
+            --borde-pixel: 3px;
+            --radio-borde: 6px;
+            --fuente-pixel: 'Press Start 2P', 'Courier New', monospace;
+            --fuente-secundaria: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            --transicion: 0.15s ease;
+        }
+
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--fuente-pixel);
+            background: var(--color-fondo);
+            background-image:
+                radial-gradient(ellipse at 30% 20%, rgba(231, 84, 128, 0.06) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 60%, rgba(242, 140, 163, 0.04) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 90%, rgba(255, 243, 224, 0.03) 0%, transparent 55%);
+            color: var(--color-texto);
+            min-height: 100vh;
+            overflow-x: hidden;
+            font-size: 10px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .contenedor-app {
+            position: relative;
+            z-index: 1;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 24px 20px;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+
+        /* ============ PANTALLA DE ACTIVACIÓN ============ */
+        .pantalla-activacion {
+            position: fixed;
+            inset: 0;
+            background: var(--color-fondo);
+            background-image:
+                radial-gradient(ellipse at center, rgba(231, 84, 128, 0.12) 0%, transparent 70%),
+                radial-gradient(ellipse at 60% 40%, rgba(242, 140, 163, 0.06) 0%, transparent 60%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+            padding: 20px;
+        }
+
+        .pantalla-activacion.desvanecer {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .pantalla-activacion .icono-principal {
+            font-size: 5rem;
+            animation: flotarSuave 2.5s ease-in-out infinite;
+            filter: drop-shadow(0 8px 16px rgba(231, 84, 128, 0.4));
+            user-select: none;
+        }
+
+        .pantalla-activacion h1 {
+            font-family: var(--fuente-pixel);
+            font-size: clamp(0.8rem, 2.5vw, 1.4rem);
+            color: var(--color-texto);
+            text-align: center;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            animation: fadeInUp 0.8s ease forwards;
+            text-shadow: 0 2px 8px rgba(231, 84, 128, 0.3);
+        }
+
+        .pantalla-activacion .subtitulo-activacion {
+            font-size: 0.55rem;
+            color: var(--color-texto-suave);
+            text-align: center;
+            letter-spacing: 1.5px;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .boton-principal {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 40px;
+            font-family: var(--fuente-pixel);
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: var(--blanco-puro);
+            background: var(--color-primario);
+            border: var(--borde-pixel) solid var(--color-primario-oscuro);
+            border-radius: var(--radio-borde);
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: var(--sombra-fuerte);
+            transition: all var(--transicion);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1.2s ease forwards;
+        }
+
+        .boton-principal:hover {
+            background: var(--color-primario-hover);
+            transform: translateY(-2px);
+            box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.35);
+        }
+
+        .boton-principal:active {
+            transform: translateY(2px);
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.4);
+            transition: all 0.05s ease;
+        }
+
+        .boton-principal .emoji-btn {
+            display: inline-block;
+            animation: flotarSuave 1.5s ease-in-out infinite;
+            font-size: 1.1rem;
+        }
+
+        /* ============ CONTENIDO PRINCIPAL ============ */
+        .contenido-principal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .contenido-principal.activo {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .grid-principal {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+            margin-bottom: 32px;
+        }
+
+        /* ============ TARJETA PRINCIPAL ============ */
+        .tarjeta-principal {
+            background: var(--color-superficie);
+            border: var(--borde-pixel) solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            padding: 28px 24px;
+            position: relative;
+            box-shadow: var(--sombra-media);
+            transition: all var(--transicion);
+        }
+
+        .tarjeta-principal:hover {
+            border-color: var(--color-borde-activo);
+            box-shadow: var(--sombra-fuerte), var(--brillo);
+        }
+
+        .badge-celebracion {
+            display: inline-block;
+            background: var(--color-acento);
+            color: var(--blanco-puro);
+            padding: 8px 18px;
+            border-radius: 4px;
+            font-size: 0.5rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            box-shadow: var(--sombra-suave);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .tarjeta-principal h2 {
+            font-family: var(--fuente-pixel);
+            font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+            color: var(--color-acento-suave);
+            margin-bottom: 8px;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+
+        .tarjeta-principal .nombre-destinatario {
+            font-family: var(--fuente-pixel);
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--color-secundario);
+            display: block;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(255, 243, 224, 0.3);
+            position: relative;
+            padding-bottom: 14px;
+        }
+
+        .tarjeta-principal .nombre-destinatario::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--color-primario);
+            border-radius: 2px;
+        }
+
+        .tarjeta-principal .mensaje-texto {
+            font-family: var(--fuente-secundaria);
+            font-size: 0.75rem;
+            line-height: 1.9;
+            color: var(--color-texto);
+            margin-bottom: 24px;
+            padding: 18px 16px;
+            background: var(--color-superficie-alt);
+            border-left: 4px solid var(--color-primario);
+            border-radius: 4px;
+            white-space: pre-line;
+            max-height: 320px;
+            overflow-y: auto;
+            letter-spacing: 0.3px;
+        }
+
+        .contador-contenedor {
+            background: var(--color-superficie-alt);
+            border: 2px solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            padding: 18px 14px;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .contador-contenedor h3 {
+            font-size: 0.45rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-texto-suave);
+            margin-bottom: 12px;
+        }
+
+        .contador-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .contador-item {
+            background: var(--color-superficie);
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            padding: 10px 6px;
+            box-shadow: var(--sombra-suave);
+            transition: all var(--transicion);
+        }
+
+        .contador-item:hover {
+            border-color: var(--color-borde-activo);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-media);
+        }
+
+        .contador-item .numero {
+            font-size: 1.3rem;
+            font-family: var(--fuente-pixel);
+            color: var(--rojo-intenso);
+            text-shadow: 0 0 12px rgba(231, 76, 60, 0.5);
+            line-height: 1;
+            display: block;
+        }
+
+        .contador-item .etiqueta {
+            font-size: 0.35rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-texto-muted);
+            margin-top: 5px;
+        }
+
+        .estadisticas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            text-align: center;
+        }
+
+        .estadistica-item {
+            background: var(--color-superficie-alt);
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            padding: 10px 6px;
+            font-size: 0.4rem;
+            letter-spacing: 0.5px;
+            box-shadow: var(--sombra-suave);
+            transition: all var(--transicion);
+        }
+
+        .estadistica-item:hover {
+            border-color: var(--color-borde-activo);
+        }
+
+        .estadistica-item .valor-stat {
+            font-size: 0.9rem;
+            font-family: var(--fuente-pixel);
+            color: var(--color-secundario);
+            display: block;
+            text-shadow: 0 0 10px rgba(255, 243, 224, 0.3);
+        }
+
+        /* ============ CANVAS CONFETI ============ */
+        .visual-contenedor {
+            position: relative;
+            background: var(--color-superficie);
+            border: var(--borde-pixel) solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            box-shadow: var(--sombra-media);
+            overflow: hidden;
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transicion);
+        }
+
+        .visual-contenedor:hover {
+            border-color: var(--color-borde-activo);
+            box-shadow: var(--sombra-fuerte), var(--brillo);
+        }
+
+        #canvasConfeti {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .visual-mensaje-central {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .visual-mensaje-central .emoji-grande {
+            font-size: 4.5rem;
+            animation: flotarSuave 2.5s ease-in-out infinite;
+            display: block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 6px 12px rgba(231, 84, 128, 0.4));
+        }
+
+        .visual-mensaje-central .frase-visual {
+            font-family: var(--fuente-pixel);
+            font-size: 0.7rem;
+            color: var(--color-secundario);
+            letter-spacing: 1px;
+            text-shadow: 0 2px 6px rgba(255, 243, 224, 0.3);
+        }
+
+        /* ============ GALERÍA ============ */
+        .seccion-galeria {
+            margin-bottom: 32px;
+        }
+
+        .seccion-galeria h3 {
+            font-family: var(--fuente-pixel);
+            font-size: 0.7rem;
+            color: var(--color-secundario);
+            margin-bottom: 18px;
+            text-align: center;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .galeria-item {
+            position: relative;
+            border: var(--borde-pixel) solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            background: var(--color-superficie-alt);
+            box-shadow: var(--sombra-media);
+            transition: all var(--transicion);
+        }
+
+        .galeria-item:hover {
+            transform: translateY(-4px);
+            border-color: var(--color-borde-activo);
+            box-shadow: var(--sombra-fuerte), var(--brillo);
+        }
+
+        .galeria-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .galeria-item:hover img {
+            transform: scale(1.06);
+        }
+
+        .galeria-item .overlay-galeria {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+            color: var(--blanco-puro);
+            padding: 14px 12px;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            font-size: 0.45rem;
+            font-family: var(--fuente-secundaria);
+            letter-spacing: 0.3px;
+        }
+
+        .galeria-item:hover .overlay-galeria {
+            opacity: 1;
+        }
+
+        .galeria-vacia {
+            text-align: center;
+            padding: 36px;
+            color: var(--color-texto-muted);
+            font-style: italic;
+            grid-column: 1 / -1;
+            font-size: 0.5rem;
+            font-family: var(--fuente-secundaria);
+        }
+
+        /* ============ MURO ============ */
+        .seccion-muro {
+            margin-bottom: 32px;
+            background: var(--color-superficie);
+            border: var(--borde-pixel) solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            padding: 24px;
+            box-shadow: var(--sombra-media);
+        }
+
+        .seccion-muro h3 {
+            font-family: var(--fuente-pixel);
+            font-size: 0.7rem;
+            color: var(--color-secundario);
+            margin-bottom: 18px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .muro-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .muro-form input,
+        .muro-form textarea {
+            padding: 12px 14px;
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            font-size: 0.5rem;
+            background: var(--color-superficie-alt);
+            color: var(--color-texto);
+            font-family: var(--fuente-secundaria);
+            letter-spacing: 0.3px;
+            transition: all var(--transicion);
+        }
+
+        .muro-form input {
+            flex: 2;
+            min-width: 140px;
+        }
+
+        .muro-form textarea {
+            flex: 3;
+            min-width: 200px;
+            resize: vertical;
+            min-height: 55px;
+        }
+
+        .muro-form input:focus,
+        .muro-form textarea:focus {
+            outline: none;
+            border-color: var(--color-primario);
+            box-shadow: 0 0 0 3px rgba(231, 84, 128, 0.12);
+            background: var(--color-superficie-hover);
+        }
+
+        .muro-form input::placeholder,
+        .muro-form textarea::placeholder {
+            color: var(--color-texto-muted);
+            opacity: 0.7;
+        }
+
+        .btn-muro {
+            padding: 12px 22px;
+            font-family: var(--fuente-pixel);
+            font-size: 0.5rem;
+            letter-spacing: 1px;
+            color: var(--blanco-puro);
+            background: var(--color-primario);
+            border: 2px solid var(--color-primario-oscuro);
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: var(--sombra-suave);
+            transition: all var(--transicion);
+            white-space: nowrap;
+        }
+
+        .btn-muro:hover {
+            background: var(--color-primario-hover);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-media);
+        }
+
+        .btn-muro:active {
+            transform: translateY(1px);
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-muro-limpiar {
+            margin-top: 12px;
+            padding: 8px 16px;
+            font-family: var(--fuente-pixel);
+            font-size: 0.4rem;
+            letter-spacing: 0.5px;
+            background: transparent;
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            color: var(--color-texto-muted);
+            cursor: pointer;
+            transition: all var(--transicion);
+        }
+
+        .btn-muro-limpiar:hover {
+            border-color: var(--rojo-intenso);
+            color: var(--rojo-intenso);
+            box-shadow: var(--sombra-suave);
+        }
+
+        .lista-mensajes {
+            max-height: 260px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 6px;
+        }
+
+        .mensaje-item {
+            background: var(--color-superficie-alt);
+            border: 2px solid var(--color-borde);
+            border-left: 4px solid var(--color-primario);
+            border-radius: 4px;
+            padding: 12px 14px;
+            font-size: 0.48rem;
+            box-shadow: var(--sombra-suave);
+            animation: fadeInUp 0.35s ease forwards;
+            transition: all var(--transicion);
+        }
+
+        .mensaje-item:hover {
+            border-color: var(--color-borde-activo);
+            transform: translateX(3px);
+        }
+
+        .mensaje-item .autor-mensaje {
+            color: var(--color-acento-suave);
+            font-family: var(--fuente-pixel);
+            font-size: 0.45rem;
+            letter-spacing: 0.5px;
+        }
+
+        .mensaje-item .texto-mensaje {
+            margin-top: 6px;
+            font-family: var(--fuente-secundaria);
+            line-height: 1.7;
+            letter-spacing: 0.3px;
+        }
+
+        .mensaje-item .fecha-mensaje {
+            font-size: 0.35rem;
+            color: var(--color-texto-muted);
+            margin-top: 8px;
+            font-family: var(--fuente-pixel);
+        }
+
+        /* ============ PERSONALIZACIÓN ============ */
+        .seccion-personalizacion {
+            margin-bottom: 32px;
+            background: var(--color-superficie);
+            border: var(--borde-pixel) solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            padding: 24px;
+            box-shadow: var(--sombra-media);
+        }
+
+        .seccion-personalizacion h3 {
+            font-family: var(--fuente-pixel);
+            font-size: 0.7rem;
+            color: var(--color-secundario);
+            margin-bottom: 18px;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .personalizacion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+            gap: 14px;
+        }
+
+        .personalizacion-grid label {
+            font-size: 0.42rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--color-texto-suave);
+            display: block;
+            margin-bottom: 5px;
+            font-family: var(--fuente-pixel);
+        }
+
+        .personalizacion-grid input,
+        .personalizacion-grid select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            font-size: 0.5rem;
+            background: var(--color-superficie-alt);
+            color: var(--color-texto);
+            font-family: var(--fuente-secundaria);
+            letter-spacing: 0.3px;
+            transition: all var(--transicion);
+        }
+
+        .personalizacion-grid input:focus,
+        .personalizacion-grid select:focus {
+            outline: none;
+            border-color: var(--color-primario);
+            box-shadow: 0 0 0 3px rgba(231, 84, 128, 0.12);
+            background: var(--color-superficie-hover);
+        }
+
+        .personalizacion-grid select {
+            color: var(--color-secundario);
+            cursor: pointer;
+        }
+
+        .personalizacion-grid select option {
+            background: var(--color-superficie);
+            color: var(--color-texto);
+        }
+
+        .btn-guardar-config {
+            grid-column: 1 / -1;
+            padding: 14px;
+            font-family: var(--fuente-pixel);
+            font-size: 0.55rem;
+            letter-spacing: 1px;
+            color: var(--color-fondo);
+            background: var(--color-secundario);
+            border: 2px solid var(--color-secundario-oscuro);
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: var(--sombra-media);
+            transition: all var(--transicion);
+            font-weight: 700;
+        }
+
+        .btn-guardar-config:hover {
+            background: var(--crema-calido);
+            transform: translateY(-2px);
+            box-shadow: var(--sombra-fuerte);
+        }
+
+        .btn-guardar-config:active {
+            transform: translateY(2px);
+            box-shadow: var(--sombra-suave);
+        }
+
+        /* ============ TOGGLE MÚSICA ============ */
+        .musica-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+            width: 52px;
+            height: 52px;
+            background: var(--color-superficie);
+            border: var(--borde-pixel) solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            cursor: pointer;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--sombra-media);
+            transition: all var(--transicion);
+        }
+
+        .musica-toggle:hover {
+            border-color: var(--color-borde-activo);
+            transform: scale(1.08);
+            box-shadow: var(--sombra-fuerte), var(--brillo);
+        }
+
+        .musica-toggle.mute {
+            opacity: 0.5;
+            border-color: var(--color-borde);
+        }
+
+        /* ============ PANEL ADMIN ============ */
+        .panel-admin {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 2000;
+            background: var(--color-superficie);
+            border-bottom: 4px solid var(--color-acento);
+            color: var(--color-texto);
+            padding: 20px 24px;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.68, -0.3, 0.27, 1.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            max-height: 85vh;
+            overflow-y: auto;
+            font-size: 0.48rem;
+        }
+
+        .panel-admin.activo {
+            transform: translateY(0);
+        }
+
+        .panel-admin h3 {
+            color: var(--color-secundario);
+            margin-bottom: 14px;
+            font-family: var(--fuente-pixel);
+            font-size: 0.65rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .panel-admin .admin-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .panel-admin .admin-seccion {
+            background: var(--color-superficie-alt);
+            border: 2px solid var(--color-borde);
+            border-radius: var(--radio-borde);
+            padding: 16px;
+        }
+
+        .panel-admin .admin-seccion h4 {
+            color: var(--color-acento-suave);
+            margin-bottom: 10px;
+            font-size: 0.5rem;
+            font-family: var(--fuente-pixel);
+            letter-spacing: 0.5px;
+        }
+
+        .panel-admin label {
+            font-size: 0.4rem;
+            color: var(--color-texto-muted);
+            display: block;
+            margin-bottom: 4px;
+            font-family: var(--fuente-pixel);
+            letter-spacing: 0.5px;
+        }
+
+        .panel-admin input[type="url"],
+        .panel-admin input[type="text"] {
+            width: 100%;
+            padding: 8px 10px;
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            background: var(--color-superficie);
+            color: var(--color-texto);
+            font-size: 0.45rem;
+            font-family: var(--fuente-secundaria);
+            margin-bottom: 7px;
+            transition: all var(--transicion);
+        }
+
+        .panel-admin input:focus {
+            outline: none;
+            border-color: var(--color-primario);
+        }
+
+        .panel-admin input::placeholder {
+            color: var(--color-texto-muted);
+        }
+
+        .panel-admin .btn-archivo {
+            display: inline-block;
+            padding: 8px 14px;
+            background: var(--color-superficie);
+            border: 2px dashed var(--color-borde);
+            border-radius: 4px;
+            cursor: pointer;
+            color: var(--color-texto-suave);
+            font-size: 0.45rem;
+            text-align: center;
+            width: 100%;
+            font-family: var(--fuente-pixel);
+            letter-spacing: 0.5px;
+            transition: all var(--transicion);
+            margin-bottom: 7px;
+        }
+
+        .panel-admin .btn-archivo:hover {
+            background: var(--color-superficie-hover);
+            border-color: var(--color-acento);
+            color: var(--color-secundario);
+        }
+
+        .panel-admin input[type="file"] {
+            display: none;
+        }
+
+        .panel-admin .preview-mini {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin: 6px 0;
+        }
+
+        .panel-admin .preview-mini img {
+            width: 48px;
+            height: 48px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 2px solid var(--color-borde);
+        }
+
+        .panel-admin .btn-admin {
+            padding: 8px 16px;
+            border: 2px solid;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--fuente-pixel);
+            font-size: 0.42rem;
+            letter-spacing: 0.5px;
+            margin: 4px 3px 4px 0;
+            transition: all var(--transicion);
+            text-transform: uppercase;
+        }
+
+        .btn-admin-agregar {
+            background: var(--color-secundario);
+            color: var(--color-fondo);
+            border-color: var(--color-secundario-oscuro);
+            box-shadow: var(--sombra-suave);
+            font-weight: 700;
+        }
+
+        .btn-admin-agregar:hover {
+            background: var(--crema-calido);
+            transform: translateY(-1px);
+        }
+
+        .btn-admin-eliminar {
+            background: var(--rojo-elegante);
+            color: var(--blanco-puro);
+            border-color: #8b1a1a;
+            font-size: 0.35rem;
+            padding: 4px 8px;
+        }
+
+        .btn-admin-eliminar:hover {
+            background: var(--rojo-intenso);
+        }
+
+        .btn-admin-cerrar {
+            background: transparent;
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            color: var(--color-texto);
+            position: absolute;
+            top: 14px;
+            right: 16px;
+            font-size: 1rem;
+            width: 34px;
+            height: 34px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transicion);
+        }
+
+        .btn-admin-cerrar:hover {
+            background: rgba(231, 76, 60, 0.2);
+            border-color: var(--rojo-intenso);
+        }
+
+        .admin-lista {
+            list-style: none;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 8px;
+        }
+
+        .admin-lista li {
+            padding: 6px 0;
+            font-size: 0.4rem;
+            border-bottom: 1px solid var(--color-borde);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            word-break: break-all;
+            gap: 8px;
+            font-family: var(--fuente-secundaria);
+            letter-spacing: 0.2px;
+        }
+
+        .admin-seccion hr {
+            border: none;
+            border-top: 1px solid var(--color-borde);
+            margin: 14px 0;
+        }
+
+        /* ============ TOAST ============ */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(120px);
+            background: var(--color-superficie);
+            color: var(--color-texto);
+            padding: 12px 24px;
+            border: 2px solid var(--color-borde);
+            border-radius: 4px;
+            font-size: 0.5rem;
+            font-family: var(--fuente-pixel);
+            letter-spacing: 0.5px;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.68, -0.3, 0.27, 1.3);
+            pointer-events: none;
+            box-shadow: var(--sombra-media);
+            text-align: center;
+            max-width: 90vw;
+        }
+
+        .toast.mostrar {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast.exito {
+            border-color: var(--color-acento);
+            color: var(--color-acento-suave);
+            box-shadow: var(--sombra-media), 0 0 16px rgba(242, 140, 163, 0.2);
+        }
+
+        .toast.error {
+            border-color: var(--rojo-intenso);
+            color: var(--rojo-intenso);
+        }
+
+        .toast.secreto {
+            border-color: var(--color-acento);
+            color: var(--color-secundario);
+            box-shadow: var(--sombra-media), 0 0 20px rgba(242, 140, 163, 0.3);
+        }
+
+        /* ============ ANIMACIONES ============ */
+        @keyframes flotarSuave {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes shake {
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(-4px);
+            }
+            75% {
+                transform: translateX(4px);
+            }
+        }
+        .shake {
+            animation: shake 0.35s ease;
+        }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-superficie);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-acento);
+            border-radius: 4px;
+            border: 1px solid var(--color-primario-oscuro);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primario);
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 1024px) {
+            .grid-principal {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .visual-contenedor {
+                min-height: 340px;
+                order: -1;
+            }
+            .contador-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .estadisticas {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .panel-admin .admin-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .contenedor-app {
+                padding: 14px 10px;
+            }
+            .tarjeta-principal {
+                padding: 20px 14px;
+            }
+            .boton-principal {
+                padding: 14px 28px;
+                font-size: 0.55rem;
+            }
+            .pantalla-activacion .icono-principal {
+                font-size: 3.5rem;
+            }
+            .pantalla-activacion h1 {
+                font-size: 0.7rem;
+            }
+            .contador-item .numero {
+                font-size: 1rem;
+            }
+            .galeria-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+            .muro-form {
+                flex-direction: column;
+            }
+            .musica-toggle {
+                bottom: 14px;
+                right: 14px;
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+            }
+            .personalizacion-grid {
+                grid-template-columns: 1fr;
+            }
+            .panel-admin {
+                padding: 14px;
+            }
+            body {
+                font-size: 9px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast"></div>
+
+    <!-- PANEL ADMIN -->
+    <div id="panelAdmin" class="panel-admin">
+        <button id="btnCerrarAdmin" class="btn-admin-cerrar" title="Cerrar panel (ESC)">✕</button>
+        <h3>🔐 PANEL SECRETO</h3>
+        <div class="admin-grid">
+            <div class="admin-seccion">
+                <h4>📸 AÑADIR FOTOS</h4>
+                <label>📁 Desde tu dispositivo:</label>
+                <div class="input-archivo-wrapper">
+                    <button type="button" class="btn-archivo" id="btnSeleccionarArchivos">📷 SELECCIONAR FOTOS</button>
+                    <input type="file" id="inputAdminFotosArchivo" accept="image/*" multiple>
+                </div>
+                <div class="preview-mini" id="previewFotosSubidas"></div>
+                <input type="text" id="inputAdminFotoDescArchivo" placeholder="Descripción...">
+                <button id="btnAdminAgregarFotosArchivo" class="btn-admin btn-admin-agregar">⬆️ SUBIR FOTOS</button>
+                <hr>
+                <label>🔗 O mediante URL:</label>
+                <input type="url" id="inputAdminFotoUrl" placeholder="https://...">
+                <input type="text" id="inputAdminFotoDesc" placeholder="Descripción...">
+                <button id="btnAdminAgregarFotoUrl" class="btn-admin btn-admin-agregar">➕ AÑADIR URL</button>
+                <h4 style="margin-top:14px;">📋 FOTOS (<span id="contadorFotosAdmin">0</span>)</h4>
+                <ul id="listaAdminFotos" class="admin-lista"></ul>
+            </div>
+            <div class="admin-seccion">
+                <h4>🎵 AÑADIR AUDIO</h4>
+                <label>📁 Desde tu dispositivo:</label>
+                <div class="input-archivo-wrapper">
+                    <button type="button" class="btn-archivo" id="btnSeleccionarAudio">🎵 SELECCIONAR AUDIO</button>
+                    <input type="file" id="inputAdminAudioArchivo" accept="audio/*">
+                </div>
+                <span id="nombreAudioSeleccionado" style="font-size:0.38rem;color:var(--color-texto-muted);display:block;margin-bottom:4px;"></span>
+                <input type="text" id="inputAdminAudioNombreArchivo" placeholder="Nombre de la pista...">
+                <button id="btnAdminAgregarAudioArchivo" class="btn-admin btn-admin-agregar">⬆️ SUBIR AUDIO</button>
+                <hr>
+                <label>🔗 O mediante URL:</label>
+                <input type="url" id="inputAdminAudioUrl" placeholder="https://...">
+                <input type="text" id="inputAdminAudioNombre" placeholder="Nombre de la pista...">
+                <button id="btnAdminAgregarAudioUrl" class="btn-admin btn-admin-agregar">➕ AÑADIR URL</button>
+                <h4 style="margin-top:14px;">🎶 PISTAS (<span id="contadorAudiosAdmin">0</span>)</h4>
+                <ul id="listaAdminAudios" class="admin-lista"></ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANTALLA DE ACTIVACIÓN -->
+    <div id="pantallaActivacion" class="pantalla-activacion">
+        <div class="icono-principal">🎁</div>
+        <h1>¡HAY UNA SORPRESA<br>ESPERÁNDOTE!</h1>
+        <p class="subtitulo-activacion">ALGO ESPECIAL PREPARADO CON MUCHO ❤️</p>
+        <button id="btnRevelar" class="boton-principal">
+            <span class="emoji-btn">🎀</span> REVELAR <span class="emoji-btn">🎀</span>
+        </button>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div id="contenidoPrincipal" class="contenido-principal contenedor-app oculto">
+        <div class="grid-principal">
+            <div class="tarjeta-principal">
+                <span class="badge-celebracion" id="badgeCelebracion">🎂 CUMPLEAÑOS</span>
+                <h2>FELIZ CUMPLEAÑOS</h2>
+                <span class="nombre-destinatario" id="nombreDestinatario">CANDY</span>
+                <div class="mensaje-texto" id="mensajePrincipal">
+                    Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.
+                </div>
+                <div class="contador-contenedor">
+                    <h3>⏳ CUENTA REGRESIVA</h3>
+                    <div class="contador-grid" id="contadorGrid">
+                        <div class="contador-item"><span class="numero" id="contadorDias">00</span><span class="etiqueta">DIAS</span></div>
+                        <div class="contador-item"><span class="numero" id="contadorHoras">00</span><span class="etiqueta">HORAS</span></div>
+                        <div class="contador-item"><span class="numero" id="contadorMinutos">00</span><span class="etiqueta">MIN</span></div>
+                        <div class="contador-item"><span class="numero" id="contadorSegundos">00</span><span class="etiqueta">SEG</span></div>
+                    </div>
+                </div>
+                <div class="estadisticas">
+                    <div class="estadistica-item"><span class="valor-stat" id="statVisitas">1</span> VISITAS</div>
+                    <div class="estadistica-item"><span class="valor-stat" id="statMensajes">0</span> MSGS</div>
+                    <div class="estadistica-item"><span class="valor-stat" id="statFotos">0</span> FOTOS</div>
+                </div>
+            </div>
+            <div class="visual-contenedor" id="visualContenedor">
+                <canvas id="canvasConfeti"></canvas>
+                <div class="visual-mensaje-central">
+                    <span class="emoji-grande">🎂</span>
+                    <span class="frase-visual">¡FELICIDADES!</span>
+                </div>
+            </div>
+        </div>
+        <div class="seccion-galeria" id="seccionGaleria">
+            <h3>📸 MOMENTOS ESPECIALES</h3>
+            <div class="galeria-grid" id="galeriaGrid">
+                <p class="galeria-vacia">✨ AÚN NO HAY FOTOS. ¡AÑADE ALGUNAS! ✨</p>
+            </div>
+        </div>
+        <div class="seccion-muro" id="seccionMuro">
+            <h3>💌 MURO DE MENSAJES</h3>
+            <div class="muro-form">
+                <input type="text" id="inputAutorMuro" placeholder="TU NOMBRE" maxlength="30">
+                <textarea id="inputMensajeMuro" placeholder="ESCRIBE UN MENSAJE PARA CANDY..." maxlength="300"></textarea>
+                <button id="btnEnviarMuro" class="btn-muro">💝 ENVIAR</button>
+            </div>
+            <div class="lista-mensajes" id="listaMensajes"></div>
+            <button id="btnLimpiarMuro" class="btn-muro-limpiar">🗑️ LIMPIAR MURO</button>
+        </div>
+        <div class="seccion-personalizacion" id="seccionPersonalizacion">
+            <h3>🎨 PERSONALIZAR</h3>
+            <div class="personalizacion-grid">
+                <div><label for="inputConfigNombre">NOMBRE</label><input type="text" id="inputConfigNombre" value="Candy" maxlength="30"></div>
+                <div><label for="inputConfigMensaje">MENSAJE</label><input type="text" id="inputConfigMensaje" maxlength="500"></div>
+                <div><label for="inputConfigColor">COLOR TEMA</label><input type="color" id="inputConfigColor" value="#E75480"></div>
+                <div><label for="selectConfigCelebracion">CELEBRACIÓN</label>
+                    <select id="selectConfigCelebracion">
+                        <option value="cumpleaños">🎂 CUMPLEAÑOS</option><option value="aniversario">💍 ANIVERSARIO</option>
+                        <option value="graduacion">🎓 GRADUACIÓN</option><option value="navidad">🎄 NAVIDAD</option>
+                        <option value="diadelamadre">🌸 DÍA DE LA MADRE</option><option value="sanvalentin">💘 SAN VALENTÍN</option>
+                        <option value="personalizado">✨ ESPECIAL</option>
+                    </select>
+                </div>
+                <div><label for="inputConfigFecha">FECHA EVENTO</label><input type="date" id="inputConfigFecha" value="2026-05-06"></div>
+                <button id="btnGuardarConfig" class="btn-guardar-config">💾 GUARDAR CONFIGURACIÓN</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="btnMusicaToggle" class="musica-toggle oculto" title="MÚSICA ON/OFF">🎵</button>
+    <audio id="audioElemento" loop preload="none" style="display:none;"></audio>
+
+    <script>
+        (function() {
+            // ============================================================
+            // 🔥 CONFIGURACIÓN FIREBASE - CAMBIA ESTA URL
+            // ============================================================
+            const FIREBASE_URL = 'https://cumple-bc6e4-default-rtdb.firebaseio.com';
+
+            // ============================================================
+            // 🎵 SINTETIZADOR CHIPTUNE
+            // ============================================================
+            const ChiptunePlayer = {
+                audioCtx: null,
+                isPlaying: false,
+                currentNoteIndex: 0,
+                noteInterval: null,
+                masterGain: null,
+                melody: [
+                    { freq: 264, dur: 0.35 }, { freq: 264, dur: 0.35 }, { freq: 297, dur: 0.35 },
+                    { freq: 264, dur: 0.35 }, { freq: 352, dur: 0.35 }, { freq: 330, dur: 0.35 },
+                    { freq: 264, dur: 0.7 }, { freq: 0, dur: 0.2 }, { freq: 264, dur: 0.35 },
+                    { freq: 264, dur: 0.35 }, { freq: 297, dur: 0.35 }, { freq: 264, dur: 0.35 },
+                    { freq: 396, dur: 0.35 }, { freq: 352, dur: 0.35 }, { freq: 264, dur: 0.7 },
+                    { freq: 0, dur: 0.2 }, { freq: 264, dur: 0.35 }, { freq: 264, dur: 0.35 },
+                    { freq: 528, dur: 0.35 }, { freq: 440, dur: 0.35 }, { freq: 352, dur: 0.35 },
+                    { freq: 330, dur: 0.35 }, { freq: 297, dur: 0.7 }, { freq: 0, dur: 0.2 },
+                    { freq: 466, dur: 0.35 }, { freq: 466, dur: 0.35 }, { freq: 440, dur: 0.35 },
+                    { freq: 352, dur: 0.35 }, { freq: 396, dur: 0.35 }, { freq: 352, dur: 0.7 },
+                    { freq: 0, dur: 0.5 }, { freq: 528, dur: 0.3 }, { freq: 528, dur: 0.3 },
+                    { freq: 528, dur: 0.6 }, { freq: 0, dur: 0.8 },
+                ],
+                init() {
+                    if (!this.audioCtx) {
+                        this.audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+                        this.masterGain = this.audioCtx.createGain();
+                        this.masterGain.gain.value = 0.1;
+                        this.masterGain.connect(this.audioCtx.destination);
+                    }
+                },
+                playNote(freq, startTime, duration) {
+                    if (freq === 0) return;
+                    const osc = this.audioCtx.createOscillator();
+                    const noteGain = this.audioCtx.createGain();
+                    osc.type = 'square';
+                    osc.frequency.value = freq;
+                    const now = this.audioCtx.currentTime + startTime;
+                    noteGain.gain.setValueAtTime(0, now);
+                    noteGain.gain.linearRampToValueAtTime(0.25, now + 0.02);
+                    noteGain.gain.linearRampToValueAtTime(0.15, now + duration * 0.7);
+                    noteGain.gain.linearRampToValueAtTime(0, now + duration);
+                    osc.connect(noteGain);
+                    noteGain.connect(this.masterGain);
+                    osc.start(now);
+                    osc.stop(now + duration + 0.05);
+                },
+                start() { this.init(); if (this.isPlaying) return;
+                    this.isPlaying = true;
+                    this.currentNoteIndex = 0;
+                    this.playNextNote(); },
+                playNextNote() {
+                    if (!this.isPlaying || this.currentNoteIndex >= this.melody.length) { this.currentNoteIndex =
+                            0; if (this.isPlaying) setTimeout(() => this.playNextNote(), 1000); return; }
+                    const note = this.melody[this.currentNoteIndex];
+                    this.playNote(note.freq, 0, note.dur);
+                    this.currentNoteIndex++;
+                    this.noteInterval = setTimeout(() => this.playNextNote(), note.dur * 1000);
+                },
+                stop() { this.isPlaying = false; if (this.noteInterval) { clearTimeout(this.noteInterval);
+                        this.noteInterval = null; } },
+                toggle() { return this.isPlaying ? (this.stop(), false) : (this.start(), true); }
+            };
+
+            // ============================================================
+            // CONFIGURACIÓN
+            // ============================================================
+            const CONFIG_DEFAULT = {
+                nombre: 'Candy',
+                mensaje: 'Mamá, en tu día quiero darte las gracias por cada abrazo, por cada noche de desvelo, por tu paciencia infinita y por creer en mí siempre. Eres mi hogar, mi mejor consejo y mi mayor ejemplo. Que cumplas muchos años más, y que cada uno te devuelva un poquito de todo el amor que tú das. Feliz cumpleaños, te quiero con todo mi corazón.',
+                colorTema: '#E75480',
+                tipoCelebracion: 'cumpleaños',
+                fechaEvento: '2026-05-06',
+                visitas: 1,
+            };
+            const CELEBRACIONES = {
+                'cumpleaños': { emoji: '🎂', nombre: 'CUMPLEAÑOS', icono: '🎉' },
+                'aniversario': { emoji: '💍', nombre: 'ANIVERSARIO', icono: '💑' },
+                'graduacion': { emoji: '🎓', nombre: 'GRADUACIÓN', icono: '📚' },
+                'navidad': { emoji: '🎄', nombre: 'NAVIDAD', icono: '🎅' },
+                'diadelamadre': { emoji: '🌸', nombre: 'DÍA DE LA MADRE', icono: '👩‍👧' },
+                'sanvalentin': { emoji: '💘', nombre: 'SAN VALENTÍN', icono: '💝' },
+                'personalizado': { emoji: '✨', nombre: 'ESPECIAL', icono: '🌟' },
+            };
+            const SECUENCIA_SECRETA = '76989903';
+            let bufferSecuencia = '';
+            let estadoApp = 'INICIO';
+            let configActual = { ...CONFIG_DEFAULT };
+            let mensajesMuro = [];
+            let fotosGaleria = [];
+            let audiosDisponibles = [];
+            let audioActualIndex = 0;
+            let musicaActivada = false;
+            let usandoChiptune = true;
+            let animacionConfetiId = null;
+            let particulas = [];
+            const MAX_PARTICULAS = 100;
+            const $ = (s) => document.querySelector(s);
+
+            // DOM refs
+            const domPantallaActivacion = $('#pantallaActivacion');
+            const domContenidoPrincipal = $('#contenidoPrincipal');
+            const domBtnRevelar = $('#btnRevelar');
+            const domCanvasConfeti = $('#canvasConfeti');
+            const domVisualContenedor = $('#visualContenedor');
+            const domNombreDestinatario = $('#nombreDestinatario');
+            const domMensajePrincipal = $('#mensajePrincipal');
+            const domBadgeCelebracion = $('#badgeCelebracion');
+            const domContadorDias = $('#contadorDias');
+            const domContadorHoras = $('#contadorHoras');
+            const domContadorMinutos = $('#contadorMinutos');
+            const domContadorSegundos = $('#contadorSegundos');
+            const domStatVisitas = $('#statVisitas');
+            const domStatMensajes = $('#statMensajes');
+            const domStatFotos = $('#statFotos');
+            const domGaleriaGrid = $('#galeriaGrid');
+            const domListaMensajes = $('#listaMensajes');
+            const domInputAutorMuro = $('#inputAutorMuro');
+            const domInputMensajeMuro = $('#inputMensajeMuro');
+            const domBtnEnviarMuro = $('#btnEnviarMuro');
+            const domBtnLimpiarMuro = $('#btnLimpiarMuro');
+            const domInputConfigNombre = $('#inputConfigNombre');
+            const domInputConfigMensaje = $('#inputConfigMensaje');
+            const domInputConfigColor = $('#inputConfigColor');
+            const domSelectConfigCelebracion = $('#selectConfigCelebracion');
+            const domInputConfigFecha = $('#inputConfigFecha');
+            const domBtnGuardarConfig = $('#btnGuardarConfig');
+            const domBtnMusicaToggle = $('#btnMusicaToggle');
+            const domAudioElemento = $('#audioElemento');
+            const domPanelAdmin = $('#panelAdmin');
+            const domBtnCerrarAdmin = $('#btnCerrarAdmin');
+            const domToast = $('#toast');
+            const domBtnSeleccionarArchivos = $('#btnSeleccionarArchivos');
+            const domInputAdminFotosArchivo = $('#inputAdminFotosArchivo');
+            const domPreviewFotosSubidas = $('#previewFotosSubidas');
+            const domInputAdminFotoDescArchivo = $('#inputAdminFotoDescArchivo');
+            const domBtnAdminAgregarFotosArchivo = $('#btnAdminAgregarFotosArchivo');
+            const domInputAdminFotoUrl = $('#inputAdminFotoUrl');
+            const domInputAdminFotoDesc = $('#inputAdminFotoDesc');
+            const domBtnAdminAgregarFotoUrl = $('#btnAdminAgregarFotoUrl');
+            const domListaAdminFotos = $('#listaAdminFotos');
+            const domContadorFotosAdmin = $('#contadorFotosAdmin');
+            const domBtnSeleccionarAudio = $('#btnSeleccionarAudio');
+            const domInputAdminAudioArchivo = $('#inputAdminAudioArchivo');
+            const domNombreAudioSeleccionado = $('#nombreAudioSeleccionado');
+            const domInputAdminAudioNombreArchivo = $('#inputAdminAudioNombreArchivo');
+            const domBtnAdminAgregarAudioArchivo = $('#btnAdminAgregarAudioArchivo');
+            const domInputAdminAudioUrl = $('#inputAdminAudioUrl');
+            const domInputAdminAudioNombre = $('#inputAdminAudioNombre');
+            const domBtnAdminAgregarAudioUrl = $('#btnAdminAgregarAudioUrl');
+            const domListaAdminAudios = $('#listaAdminAudios');
+            const domContadorAudiosAdmin = $('#contadorAudiosAdmin');
+
+            let ctxConfeti = null;
+            let archivosFotosSeleccionadas = [];
+            let archivoAudioSeleccionado = null;
+
+            // ============================================================
+            // UTILIDADES
+            // ============================================================
+            function mostrarToast(m, t = '') {
+                domToast.textContent = m;
+                domToast.className = 'toast ' + t + ' mostrar';
+                clearTimeout(domToast._timeout);
+                domToast._timeout = setTimeout(() => domToast.classList.remove('mostrar'), 2200);
+            }
+
+            function padDos(n) { return String(n).padStart(2, '0'); }
+
+            function calcularTiempoRestante(fecha) {
+                const ahora = new Date();
+                const obj = new Date(fecha + 'T00:00:00');
+                const diff = obj - ahora;
+                if (diff <= 0) return { dias: 0, horas: 0, minutos: 0, segundos: 0, yaPaso: true };
+                return {
+                    dias: Math.floor(diff / 86400000),
+                    horas: Math.floor(diff / 3600000) % 24,
+                    minutos: Math.floor(diff / 60000) % 60,
+                    segundos: Math.floor(diff / 1000) % 60,
+                    yaPaso: false
+                };
+            }
+
+            function aplicarTema(hex) {
+                const root = document.documentElement.style;
+                root.setProperty('--color-primario', hex);
+                const r = parseInt(hex.slice(1, 3), 16),
+                    g = parseInt(hex.slice(3, 5), 16),
+                    b = parseInt(hex.slice(5, 7), 16);
+                root.setProperty('--color-primario-hover',
+                    `#${Math.min(255,r+20).toString(16).padStart(2,'0')}${Math.min(255,g+15).toString(16).padStart(2,'0')}${Math.min(255,b+20).toString(16).padStart(2,'0')}`
+                    );
+            }
+
+            function obtenerVisitas() {
+                let v = parseInt(localStorage.getItem('candy_visitas') || '0');
+                if (!sessionStorage.getItem('candy_visita_actual')) { v++;
+                    localStorage.setItem('candy_visitas', v);
+                    sessionStorage.setItem('candy_visita_actual', '1'); }
+                return v;
+            }
+
+            function archivoABase64(arch) {
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = () => reject(new Error('Error'));
+                    reader.readAsDataURL(arch);
+                });
+            }
+
+            // ============================================================
+            // 🔥 PERSISTENCIA CON FIREBASE + LOCALSTORAGE
+            // ============================================================
+            function guardarConfigEnStorage() {
+                localStorage.setItem('candy_config', JSON.stringify(configActual));
+                try { fetch(`${FIREBASE_URL}/config.json`, { method: 'PUT', body: JSON.stringify(configActual) }); } catch (
+                e) {}
+            }
+
+            async function cargarConfigDesdeStorage() {
+                try {
+                    const res = await fetch(`${FIREBASE_URL}/config.json`);
+                    const data = await res.json();
+                    if (data && data.nombre) {
+                        configActual = { ...CONFIG_DEFAULT, ...data };
+                        localStorage.setItem('candy_config', JSON.stringify(configActual));
+                        return;
+                    }
+                } catch (e) {}
+                const g = localStorage.getItem('candy_config');
+                configActual = g ? { ...CONFIG_DEFAULT, ...JSON.parse(g) } : { ...CONFIG_DEFAULT };
+            }
+
+            async function guardarMensajesEnStorage() {
+                localStorage.setItem('candy_mensajes', JSON.stringify(mensajesMuro));
+                try {
+                    await fetch(`${FIREBASE_URL}/mensajes.json`, { method: 'PUT', body: JSON.stringify(
+                        mensajesMuro) });
+                } catch (e) { console.log('Offline - mensajes guardados localmente'); }
+            }
+
+            async function cargarMensajesDesdeStorage() {
+                try {
+                    const res = await fetch(`${FIREBASE_URL}/mensajes.json`);
+                    const data = await res.json();
+                    if (data && Array.isArray(data)) {
+                        mensajesMuro = data;
+                        localStorage.setItem('candy_mensajes', JSON.stringify(mensajesMuro));
+                    }
+                } catch (e) {
+                    const g = localStorage.getItem('candy_mensajes');
+                    mensajesMuro = g ? JSON.parse(g) : [];
+                }
+                renderizarMuro();
+            }
+
+            async function guardarFotosEnStorage() {
+                try { localStorage.setItem('candy_fotos', JSON.stringify(fotosGaleria)); } catch (e) {}
+                try {
+                    const ligeras = fotosGaleria.map(f => ({
+                        url: f.url && f.url.length > 500 ? '[IMAGEN_LOCAL]' : (f.url || ''),
+                        descripcion: f.descripcion || '',
+                        esBase64: !!f.esBase64
+                    }));
+                    await fetch(`${FIREBASE_URL}/fotos.json`, { method: 'PUT', body: JSON.stringify(ligeras) });
+                } catch (e) { console.log('Offline - fotos guardadas localmente'); }
+            }
+
+            async function cargarFotosDesdeStorage() {
+                try {
+                    const res = await fetch(`${FIREBASE_URL}/fotos.json`);
+                    const data = await res.json();
+                    if (data && Array.isArray(data) && data.length > 0) {
+                        const locales = JSON.parse(localStorage.getItem('candy_fotos') || '[]');
+                        fotosGaleria = locales.length >= data.length ? locales : data;
+                    }
+                } catch (e) {
+                    const g = localStorage.getItem('candy_fotos');
+                    fotosGaleria = g ? JSON.parse(g) : [];
+                }
+                renderizarGaleria();
+            }
+
+            async function guardarAudiosEnStorage() {
+                try { localStorage.setItem('candy_audios', JSON.stringify(audiosDisponibles)); } catch (e) {}
+                try {
+                    const ligeros = audiosDisponibles.map(a => ({
+                        url: a.url && a.url.length > 500 ? '[AUDIO_LOCAL]' : (a.url || ''),
+                        nombre: a.nombre || '',
+                        esBase64: !!a.esBase64
+                    }));
+                    await fetch(`${FIREBASE_URL}/audios.json`, { method: 'PUT', body: JSON.stringify(ligeros) });
+                } catch (e) { console.log('Offline - audios guardados localmente'); }
+            }
+
+            async function cargarAudiosDesdeStorage() {
+                try {
+                    const res = await fetch(`${FIREBASE_URL}/audios.json`);
+                    const data = await res.json();
+                    if (data && Array.isArray(data) && data.length > 0) {
+                        const locales = JSON.parse(localStorage.getItem('candy_audios') || '[]');
+                        audiosDisponibles = locales.length >= data.length ? locales : data;
+                    }
+                } catch (e) {
+                    const g = localStorage.getItem('candy_audios');
+                    audiosDisponibles = g ? JSON.parse(g) : [];
+                }
+                renderizarPanelAdmin();
+            }
+
+            // ============================================================
+            // CANVAS CONFETI
+            // ============================================================
+            function iniciarCanvasConfeti() {
+                const canvas = domCanvasConfeti;
+                canvas.width = domVisualContenedor.clientWidth;
+                canvas.height = domVisualContenedor.clientHeight;
+                ctxConfeti = canvas.getContext('2d');
+                ctxConfeti.imageSmoothingEnabled = false;
+                particulas = [];
+                const col = [configActual.colorTema, '#FFF3E0', '#F28CA3', '#FDEBD0', '#F8C8DC', '#ffb3c6', '#ffe0e8'];
+                for (let i = 0; i < MAX_PARTICULAS; i++)
+                    particulas.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height - canvas.height,
+                        tamano: Math.floor(Math.random() * 7) + 3,
+                        color: col[Math.floor(Math.random() * col.length)],
+                        velocidadY: Math.random() * 1.8 + 0.4,
+                        velocidadX: (Math.random() - 0.5) * 1.2,
+                        rotacion: Math.floor(Math.random() * 4) * 90,
+                        opacidad: Math.random() * 0.6 + 0.3,
+                    });
+                animarConfeti();
+            }
+
+            function animarConfeti() {
+                if (!ctxConfeti) return;
+                const c = domCanvasConfeti;
+                ctxConfeti.clearRect(0, 0, c.width, c.height);
+                particulas.forEach(p => {
+                    ctxConfeti.save();
+                    ctxConfeti.globalAlpha = p.opacidad;
+                    ctxConfeti.translate(Math.floor(p.x), Math.floor(p.y));
+                    ctxConfeti.rotate((p.rotacion * Math.PI) / 180);
+                    ctxConfeti.fillStyle = p.color;
+                    ctxConfeti.fillRect(-p.tamano / 2, -p.tamano / 2, p.tamano, p.tamano);
+                    ctxConfeti.restore();
+                    p.y += p.velocidadY;
+                    p.x += p.velocidadX;
+                    if (p.y > c.height + 20) { p.y = -20;
+                        p.x = Math.random() * c.width; }
+                    if (p.x < -20) p.x = c.width + 20;
+                    if (p.x > c.width + 20) p.x = -20;
+                });
+                animacionConfetiId = requestAnimationFrame(animarConfeti);
+            }
+
+            function explosionConfeti() {
+                if (!ctxConfeti) return;
+                const c = domCanvasConfeti;
+                const col = [configActual.colorTema, '#FFF3E0', '#F28CA3', '#FDEBD0', '#F8C8DC', '#ffb3c6'];
+                for (let i = 0; i < 60; i++) {
+                    const idx = Math.floor(Math.random() * particulas.length);
+                    if (idx < particulas.length) {
+                        particulas[idx].x = c.width / 2 + (Math.random() - 0.5) * 120;
+                        particulas[idx].y = c.height / 2 + (Math.random() - 0.5) * 120;
+                        particulas[idx].velocidadY = (Math.random() - 0.5) * 8;
+                        particulas[idx].velocidadX = (Math.random() - 0.5) * 8;
+                        particulas[idx].opacidad = 1;
+                        particulas[idx].color = col[Math.floor(Math.random() * col.length)];
+                        particulas[idx].tamano = Math.floor(Math.random() * 8) + 3;
+                    }
+                }
+            }
+
+            function redimensionarCanvas() {
+                if (!domVisualContenedor || !domCanvasConfeti) return;
+                domCanvasConfeti.width = domVisualContenedor.clientWidth;
+                domCanvasConfeti.height = domVisualContenedor.clientHeight;
+            }
+
+            // ============================================================
+            // MÚSICA
+            // ============================================================
+            function reproducirMusica() {
+                if (audiosDisponibles.length > 0) { usandoChiptune = false;
+                    ChiptunePlayer.stop();
+                    domAudioElemento.src = audiosDisponibles[audioActualIndex].url;
+                    domAudioElemento.play().catch(() => {}); } else { usandoChiptune = true;
+                    ChiptunePlayer.start(); }
+                domBtnMusicaToggle.textContent = '🎵';
+                domBtnMusicaToggle.classList.remove('mute');
+                musicaActivada = true;
+            }
+
+            function pausarMusica() {
+                usandoChiptune ? ChiptunePlayer.stop() : domAudioElemento.pause();
+                domBtnMusicaToggle.textContent = '🔇';
+                domBtnMusicaToggle.classList.add('mute');
+                musicaActivada = false;
+            }
+
+            function detenerMusica() {
+                ChiptunePlayer.stop();
+                domAudioElemento.pause();
+                domAudioElemento.src = '';
+                domBtnMusicaToggle.textContent = '🔇';
+                domBtnMusicaToggle.classList.add('mute');
+                musicaActivada = false;
+            }
+
+            function toggleMusica() { musicaActivada ? pausarMusica() : reproducirMusica(); }
+
+            function siguienteAudio() {
+                if (!audiosDisponibles.length) return;
+                audioActualIndex = (audioActualIndex + 1) % audiosDisponibles.length;
+                if (musicaActivada && !usandoChiptune) reproducirMusica();
+            }
+
+            // ============================================================
+            // RENDERIZADO
+            // ============================================================
+            function actualizarUI() {
+                domNombreDestinatario.textContent = configActual.nombre.toUpperCase();
+                domMensajePrincipal.textContent = configActual.mensaje;
+                const celeb = CELEBRACIONES[configActual.tipoCelebracion] || CELEBRACIONES['personalizado'];
+                domBadgeCelebracion.textContent = `${celeb.emoji} ${celeb.nombre}`;
+                document.title =
+                    `${celeb.emoji} FELIZ ${celeb.nombre}, ${configActual.nombre.toUpperCase()}! ${celeb.icono}`;
+                const eg = document.querySelector('.visual-mensaje-central .emoji-grande');
+                const fv = document.querySelector('.visual-mensaje-central .frase-visual');
+                if (eg) eg.textContent = celeb.emoji;
+                if (fv) fv.textContent = `¡FELIZ ${celeb.nombre}!`;
+                aplicarTema(configActual.colorTema);
+                domInputConfigNombre.value = configActual.nombre;
+                domInputConfigMensaje.value = configActual.mensaje;
+                domInputConfigColor.value = configActual.colorTema;
+                domSelectConfigCelebracion.value = configActual.tipoCelebracion;
+                domInputConfigFecha.value = configActual.fechaEvento;
+                configActual.visitas = obtenerVisitas();
+                domStatVisitas.textContent = configActual.visitas;
+                domStatMensajes.textContent = mensajesMuro.length;
+                domStatFotos.textContent = fotosGaleria.length;
+                guardarConfigEnStorage();
+            }
+
+            function actualizarContador() {
+                const t = calcularTiempoRestante(configActual.fechaEvento);
+                domContadorDias.textContent = padDos(t.dias);
+                domContadorHoras.textContent = padDos(t.horas);
+                domContadorMinutos.textContent = padDos(t.minutos);
+                domContadorSegundos.textContent = padDos(t.segundos);
+                const h3 = document.querySelector('.contador-contenedor h3');
+                if (t.yaPaso && h3) h3.textContent = '🎉 ¡EL GRAN DÍA LLEGÓ! 🎉';
+            }
+
+            function renderizarGaleria() {
+                domGaleriaGrid.innerHTML = fotosGaleria.length === 0 ?
+                    '<p class="galeria-vacia">✨ AÚN NO HAY FOTOS. ¡AÑADE ALGUNAS! ✨</p>' :
+                    fotosGaleria.map(f => `
+                        <div class="galeria-item">
+                            <img src="${f.url||''}" alt="${f.descripcion||'MOMENTO'}" loading="lazy"
+                                 onerror="this.parentElement.innerHTML='<div class=\\'galeria-vacia\\' style=\\'padding:20px;\\'>📷<br>ERROR</div>'">
+                            ${f.descripcion?`<div class="overlay-galeria">${f.descripcion}</div>`:''}
+                        </div>`).join('');
+                domStatFotos.textContent = fotosGaleria.length;
+            }
+
+            function renderizarMuro() {
+                domListaMensajes.innerHTML = mensajesMuro.length === 0 ?
+                    '<p style="text-align:center;color:var(--color-texto-muted);padding:16px;">💭 SÉ EL PRIMERO EN DEJAR UN MENSAJE...</p>' :
+                    [...mensajesMuro].reverse().map(m => `
+                        <div class="mensaje-item">
+                            <span class="autor-mensaje">💝 ${m.autor||'ANÓNIMO'}</span>
+                            <p class="texto-mensaje">${m.texto||''}</p>
+                            <span class="fecha-mensaje">${m.fecha||''}</span>
+                        </div>`).join('');
+                domStatMensajes.textContent = mensajesMuro.length;
+            }
+
+            function renderizarPanelAdmin() {
+                domContadorFotosAdmin.textContent = fotosGaleria.length;
+                domListaAdminFotos.innerHTML = fotosGaleria.map((f, i) => `
+                    <li><span>📷 ${f.descripcion||'Sin descripción'}<br><small>${f.url&&f.url.startsWith('data:')?'📁 SUBIDO':'🔗 URL'}</small></span>
+                    <button class="btn-admin btn-admin-eliminar" data-tipo="foto" data-index="${i}">✕</button></li>`
+                ).join('');
+                domContadorAudiosAdmin.textContent = audiosDisponibles.length;
+                domListaAdminAudios.innerHTML = audiosDisponibles.map((a, i) => `
+                    <li><span>🎵 ${a.nombre||'Sin nombre'}<br><small>${a.url&&a.url.startsWith('data:')?'📁 SUBIDO':'🔗 URL'}</small></span>
+                    <button class="btn-admin btn-admin-eliminar" data-tipo="audio" data-index="${i}">✕</button></li>`
+                ).join('');
+                domBtnMusicaToggle.classList.remove('oculto');
+            }
+
+            // ============================================================
+            // EVENTOS PRINCIPALES
+            // ============================================================
+            function revelarFelicitacion() {
+                estadoApp = 'ACTIVO';
+                domPantallaActivacion.classList.add('desvanecer');
+                domContenidoPrincipal.classList.remove('oculto');
+                setTimeout(() => {
+                    domContenidoPrincipal.classList.add('activo');
+                    iniciarCanvasConfeti();
+                    explosionConfeti();
+                    actualizarUI();
+                    actualizarContador();
+                    renderizarGaleria();
+                    renderizarMuro();
+                    domBtnMusicaToggle.classList.remove('oculto');
+                    setTimeout(() => { if (!musicaActivada) reproducirMusica(); }, 1200);
+                }, 400);
+                mostrarToast('🎉 ¡SORPRESA REVELADA! ¡FELIZ DÍA, ' + configActual.nombre.toUpperCase() + '!',
+                    'exito');
+            }
+
+            async function enviarMensajeMuro() {
+                const autor = domInputAutorMuro.value.trim() || 'ANÓNIMO';
+                const texto = domInputMensajeMuro.value.trim();
+                if (!texto) { mostrarToast('✍️ ESCRIBE UN MENSAJE', 'error');
+                    domInputMensajeMuro.classList.add('shake');
+                    setTimeout(() => domInputMensajeMuro.classList.remove('shake'), 400); return; }
+                mensajesMuro.push({
+                    autor,
+                    texto,
+                    fecha: new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short',
+                        year: 'numeric', hour: '2-digit', minute: '2-digit' })
+                });
+                await guardarMensajesEnStorage();
+                renderizarMuro();
+                domInputAutorMuro.value = '';
+                domInputMensajeMuro.value = '';
+                mostrarToast('💝 ¡MENSAJE ENVIADO! (Se sincronizará)', 'exito');
+            }
+
+            async function limpiarMensajesMuro() {
+                if (confirm('¿ELIMINAR TODOS LOS MENSAJES?')) { mensajesMuro = []; await guardarMensajesEnStorage();
+                    renderizarMuro();
+                    mostrarToast('🗑️ MURO LIMPIADO', ''); }
+            }
+
+            async function guardarConfiguracion() {
+                configActual.nombre = domInputConfigNombre.value.trim() || CONFIG_DEFAULT.nombre;
+                configActual.mensaje = domInputConfigMensaje.value.trim() || CONFIG_DEFAULT.mensaje;
+                configActual.colorTema = domInputConfigColor.value;
+                configActual.tipoCelebracion = domSelectConfigCelebracion.value;
+                configActual.fechaEvento = domInputConfigFecha.value;
+                await guardarConfigEnStorage();
+                actualizarUI();
+                actualizarContador();
+                aplicarTema(configActual.colorTema);
+                mostrarToast('✅ CONFIGURACIÓN GUARDADA', 'exito');
+            }
+
+            // ============================================================
+            // ADMIN
+            // ============================================================
+            async function agregarFotosDesdeArchivos() {
+                if (!archivosFotosSeleccionadas.length) { mostrarToast('📸 SELECCIONA FOTOS', 'error'); return; }
+                const desc = domInputAdminFotoDescArchivo.value.trim();
+                mostrarToast('⏳ PROCESANDO...', '');
+                let ok = 0;
+                for (const arch of archivosFotosSeleccionadas) {
+                    if (arch.size > 2 * 1024 * 1024) { mostrarToast('⚠️ ' + arch.name + ' MUY GRANDE', 'error'); continue; }
+                    try {
+                        fotosGaleria.push({ url: await archivoABase64(arch), descripcion: desc || arch.name.replace(
+                                /\.[^.]+$/, ''), esBase64: true });
+                        ok++;
+                    } catch (e) { mostrarToast('❌ ERROR: ' + arch.name, 'error'); }
+                }
+                if (ok) { await guardarFotosEnStorage();
+                    renderizarGaleria();
+                    renderizarPanelAdmin();
+                    mostrarToast('📸 ¡' + ok + ' FOTO(S)! (Local)', 'exito'); }
+                archivosFotosSeleccionadas = [];
+                domInputAdminFotosArchivo.value = '';
+                domPreviewFotosSubidas.innerHTML = '';
+                domInputAdminFotoDescArchivo.value = '';
+            }
+
+            async function agregarFotoPorUrl() {
+                const url = domInputAdminFotoUrl.value.trim(),
+                    desc = domInputAdminFotoDesc.value.trim();
+                if (!url) { mostrarToast('📸 INGRESA URL', 'error'); return; }
+                fotosGaleria.push({ url, descripcion: desc, esBase64: false });
+                await guardarFotosEnStorage();
+                renderizarGaleria();
+                renderizarPanelAdmin();
+                domInputAdminFotoUrl.value = '';
+                domInputAdminFotoDesc.value = '';
+                mostrarToast('📸 ¡FOTO AÑADIDA!', 'exito');
+            }
+
+            async function agregarAudioDesdeArchivo() {
+                if (!archivoAudioSeleccionado) { mostrarToast('🎵 SELECCIONA ARCHIVO', 'error'); return; }
+                const nombre = domInputAdminAudioNombreArchivo.value.trim() || archivoAudioSeleccionado.name.replace(
+                    /\.[^.]+$/, '');
+                if (archivoAudioSeleccionado.size > 5 * 1024 * 1024) { mostrarToast('⚠️ MUY GRANDE (>5MB)',
+                    'error'); return; }
+                mostrarToast('⏳ PROCESANDO...', '');
+                try {
+                    audiosDisponibles.push({ url: await archivoABase64(archivoAudioSeleccionado), nombre,
+                        esBase64: true });
+                    await guardarAudiosEnStorage();
+                    renderizarPanelAdmin();
+                    domInputAdminAudioArchivo.value = '';
+                    domNombreAudioSeleccionado.textContent = '';
+                    domInputAdminAudioNombreArchivo.value = '';
+                    archivoAudioSeleccionado = null;
+                    mostrarToast('🎵 ¡AUDIO SUBIDO! (Local)', 'exito');
+                } catch (e) { mostrarToast('❌ ERROR', 'error'); }
+            }
+
+            async function agregarAudioPorUrl() {
+                const url = domInputAdminAudioUrl.value.trim(),
+                    nombre = domInputAdminAudioNombre.value.trim();
+                if (!url) { mostrarToast('🎵 INGRESA URL', 'error'); return; }
+                audiosDisponibles.push({ url, nombre, esBase64: false });
+                await guardarAudiosEnStorage();
+                renderizarPanelAdmin();
+                domInputAdminAudioUrl.value = '';
+                domInputAdminAudioNombre.value = '';
+                mostrarToast('🎵 ¡AUDIO AÑADIDO!', 'exito');
+            }
+
+            async function eliminarElementoAdmin(tipo, idx) {
+                if (tipo === 'foto') { fotosGaleria.splice(idx, 1); await guardarFotosEnStorage();
+                    renderizarGaleria(); } else if (tipo === 'audio') { audiosDisponibles.splice(idx, 1); await
+                        guardarAudiosEnStorage(); if (audioActualIndex >= audiosDisponibles.length) audioActualIndex = Math
+                        .max(0, audiosDisponibles.length - 1); if (!audiosDisponibles.length && !usandoChiptune) {
+                        detenerMusica();
+                        usandoChiptune = true; if (musicaActivada) ChiptunePlayer.start(); } }
+                renderizarPanelAdmin();
+                mostrarToast('🗑️ ELIMINADO', '');
+            }
+
+            function abrirPanelAdmin() { domPanelAdmin.classList.add('activo');
+                renderizarPanelAdmin();
+                mostrarToast('🔐 PANEL SECRETO DESBLOQUEADO', 'secreto'); }
+
+            function cerrarPanelAdmin() { domPanelAdmin.classList.remove('activo');
+                bufferSecuencia = '';
+                archivosFotosSeleccionadas = [];
+                domInputAdminFotosArchivo.value = '';
+                domPreviewFotosSubidas.innerHTML = ''; }
+
+            function manejarSecuenciaTeclado(e) {
+                if (/^[0-9]$/.test(e.key)) { bufferSecuencia += e.key; if (bufferSecuencia.length > SECUENCIA_SECRETA
+                        .length) bufferSecuencia = bufferSecuencia.slice(-SECUENCIA_SECRETA.length); if (
+                        bufferSecuencia === SECUENCIA_SECRETA) { bufferSecuencia = '';
+                        abrirPanelAdmin(); } } else if (e.key === 'Escape') { cerrarPanelAdmin();
+                    bufferSecuencia = ''; }
+            }
+
+            function manejarClickPanelAdmin(e) {
+                const btn = e.target.closest('.btn-admin-eliminar');
+                if (btn) eliminarElementoAdmin(btn.dataset.tipo, parseInt(btn.dataset.index, 10));
+            }
+
+            function manejarSeleccionFotos(e) {
+                archivosFotosSeleccionadas = Array.from(e.target.files);
+                domPreviewFotosSubidas.innerHTML = '';
+                archivosFotosSeleccionadas.forEach((a, i) => {
+                    if (i >= 12) return;
+                    const r = new FileReader();
+                    r.onload = ev => { const img = document.createElement('img');
+                        img.src = ev.target.result;
+                        img.title = a.name;
+                        domPreviewFotosSubidas.appendChild(img); };
+                    r.readAsDataURL(a);
+                });
+                if (archivosFotosSeleccionadas.length > 12) {
+                    const sp = document.createElement('span');
+                    sp.style.cssText =
+                        'font-size:0.38rem;color:var(--color-texto-muted);display:flex;align-items:center;';
+                    sp.textContent = '+ ' + (archivosFotosSeleccionadas.length - 12) + ' MÁS';
+                    domPreviewFotosSubidas.appendChild(sp);
+                }
+            }
+
+            function manejarSeleccionAudio(e) {
+                archivoAudioSeleccionado = e.target.files[0] || null;
+                domNombreAudioSeleccionado.textContent = archivoAudioSeleccionado ? '📁 ' + archivoAudioSeleccionado
+                    .name + ' (' + (archivoAudioSeleccionado.size / 1e6).toFixedtoFixed(1(1) +) + ' MB ' MB)' :)' : '';
+            '';
+            }
+
+            function manejarFin }
+
+            function manejarFinAudio()Audio() { siguienteAudio(); { siguienteAudio(); }
+
+ }
+
+                       // ========================================================= // ============================================================
+===
+            //            // INIC INICIALIZACIÓN
+IALIZACIÓN
+                       // =========================================================== // ============================================================
+            async function=
+            async function init() {
+                init() {
+                await car await cargarConfigDesdeStoragegarConfigDesdeStorage();
+               ();
+                await car await cargarMgarMensajesensajesDesdeStorage();
+               DesdeStorage();
+                await cargarF await cargarFotosDesdeStorage();
+otosDesdeStorage();
+                await cargar                await cargarAudiosDesdeAudiosDesdeStorageStorage();
+               ();
+                configActual configActual.vis.visitas = obtenerVisitas = obtenerVisitas();
+itas();
+                guard                guardarConfigEnStorage();
+               arConfigEnStorage();
+                aplicarTema(config aplicarTema(configActual.colorTemaActual.colorTema);
+               );
+                domInput domInputConfigNombre.value =ConfigNombre.value = configActual.nombre configActual;
+               .nombre;
+                domInput domInputConfigMensajeConfigMens.value = configActualaje.value = configActual.mens.mensaje;
+aje;
+                domInputConfig                domInputConfigColor.valueColor.value = config = configActual.colorTemaActual.colorTema;
+               ;
+                domSelect domSelectConfigCeleConfigCelebracion.valuebracion.value = configActual.t = configActual.tipoCelebracipoCelebracion;
+               ion;
+                dom domInputConfigFecha.value = configInputConfigFecha.value = configActual.fechaEventActual.fechaEvento;
+
+                domo;
+
+                domBtnReBtnRevelar.addEventListener('velar.addEventListener('click', revelarclick', revelarFelFelicitacion);
+icitacion);
+                domBtnEn                domBtnEnviarMuroviarMuro.addEventListener('.addEventListener('click',click', enviar enviarMensMensajeMajeMuro);
+uro);
+                dom                domBtnLimBtnLimpiarMuropiarMuro.addEventListener('.addEventListener('click',click', limpi limpiarMarMensajesensajesMuroMuro);
+               );
+                domBtn domBtnGuardGuardararConfig.addEventListener('clickConfig.addEventListener('click', guardarConfig', guardarConfiguracion);
+uracion);
+                domBtnMus                domBtnMusicaToggle.addEventListener('icaToggle.addEventListener('click',click', toggleMusica);
+ toggleMusica);
+                dom                domBtnCerrarAdmin.addEventListener('click', cerrBtnCerrarAdmin.addEventListener('click', cerrarPanelAdminarPanelAdmin);
+);
+                dom                domAudioElemento.addEventListenerAudioElement('ended', manejarFinAudio);
+o.addEventListener('ended', manejarFinAudio);
+                               domBtnSe domBtnSeleccionarArchleccionarArchivos.addEventListenerivos.addEventListener('click('click', () => dom', ()InputAdminFotos => domInputAdminFotosArchivo.click());
+Archivo.click());
+                domInputAdminFotos                domInputAdminFotosArchivo.addEventListener('Archivo.addEventListener('change',change', mane manejarSelejarccionFotos);
+SeleccionFotos);
+                dom                domBtnAdminBtnAdminAgregAgregarFarFotosArchivo.addEventListener('clickotosArchivo.addEventListener('click', agregarFotosDesde', agregarFotosDesdeArchArchivosivos);
+               );
+                domBtn domBtnAdminAgregarFotoUrl.addEventListener('AdminAgregarFotoUrl.addEventListener('click',click', agregar agregarFotoPorUrl);
+                domFotoPorUrl);
+                domBtnSeBtnSeleccionleccionarAudioarAudio.addEventListener('.addEventListener('click',click', () => () => domInputAdminAudio domInputAdminAudioArchivoArchivo.click());
+.click());
+                domInputAdmin                domInputAdminAudioAudioArchArchivo.addEventListenerivo.addEventListener('change('change', mane', manejarSejarSeleccionAudio);
+leccionAudio);
+                dom                domBtnAdminBtnAdminAgregAgregarAudioarAudioArchivoArchivo.addEventListener('click',.addEventListener('click', agregar agregarAudioDesdeArchivoAudioDesdeArchivo);
+               );
+                domBtnAdminAgregar domBtnAdminAgregarAudioUrl.addEventListener('AudioUrl.addEventListener('click', agregarclick', agregarAudioPorUrl);
+AudioPorUrl);
+                domLista                domListaAdminFAdminFotos.addEventListenerotos.addEventListener('click('click', manejarClick', manejarClickPanelAdminPanelAdmin);
+                domList);
+                domListaAdminaAdminAudios.addEventListener('Audios.addEventListener('click',click', manejarClickPanelAdmin);
+                dom manejarClickPanelAdmin);
+                domInputMensajeInputMensajeMuro.addEventListener('keydownMuro.addEventListener('keydown', e', e => => { { if (e.key if (e.key === ' === 'Enter'Enter' && !e.shiftKey && !e.shiftKey) {) { e
+ e
+                        .                        .preventDefault();
+preventDefault();
+                        envi                        enviarMensajearMensajeMuroMuro(); }(); } });
+                document.addEventListener });
+                document.addEventListener('keydown', manejarSecuenciaTecl('keydown', manejarSecuenciaTeclado);
+                window.addEventListener('ado);
+                window.addEventListener('resize', redresize', redimensionarimensionarCanvas);
+Canvas);
+                setInterval(()                setInterval(() => { if ( => { if (estadoestadoApp ===App === 'ACT 'ACTIVO') actualIVO') actualizarContizarContador();ador(); },  }, 1000);
+
+               1000);
+
+                // 🔥 SIN // 🔥 SINCRONIZACIÓN EN TICRONIZACIÓN EN TIEMPOEMPO REAL (c REAL (cada 3ada  seg3 segundos)
+                setundos)
+                setInterval(asyncInterval(async () => () => {
+                    {
+                    if if (est (estadoApp === 'ACTIVO') {
+adoApp === 'ACTIVO') {
+                                               await car await cargarMensajesgarMensajesDesdeStorage();
+DesdeStorage();
+                                               await car await cargarFgarFotosDesdeotosDesdeStorage();
+                        awaitStorage();
+                        await cargar cargarAudiosAudiosDesdeStorage();
+                   DesdeStorage();
+                    }
+                }, 3000 }
+                }, 3000);
+
+               );
+
+                renderizarGaleria();
+                renderizarMuro();
+                renderizarPanelAdmin renderizarGaleria();
+                renderizarMuro();
+                renderizarPanelAdmin();
+               ();
+                domBtn domBtnMusicaMusicaToggle.classListToggle.classList.remove('ocult.remove('oculto');
+                consoleo');
+                console.log('.log('🌸🌸🎮 INICIALIZADO🎮 INICIALIZADO PARA ' + PARA ' + configActual.nombre configActual.nombre.toUpperCase.toUpperCase());
+());
+                console                console.log('🔥 Firebase: ' +.log('🔥 Firebase: ' + FIRE FIREBASE_URL);
+                console.logBASE_URL);
+                console.log('('🔄 Sincron🔄 Sincronización cada 3ización cada 3 segundos');
+            segundos');
+            }
+
+            document. }
+
+            document.readyState === 'loading'readyState === 'loading' ? document ? document.addEventListener('DOMContentLoaded',.addEventListener('DOMContentLoaded', init) init) : init : init();
+       ();
+        })();
+    </ })();
+    </script>
+script>
+</</body>
+</body>
+</html>
+html>
